@@ -68,7 +68,10 @@ class Essendex_Formpostutilities
 	    // Are we in testmode?
         if ($this->essconf->testmode == 1)
         {   
-           // Do an alternative that doesn't use SMS credits
+            $message = "TO: ". $dataStream['recipient'] ."\n". $dataStream['body'];
+            $app = $dataStream['originator'];
+            `/usr/local/bin/growlnotify -m "$message" -aVox.app "$app"`;
+            $result = NULL;
         }
         else {
 		    //$result = curl_exec( $curlHandle ); 						// run the whole process
