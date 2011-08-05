@@ -52,6 +52,10 @@ class IndexController extends Zend_Controller_Action
 	public function sendAction()
 	{
         $this->view->pageTitle = "Send a message";
+        
+        // Show the form
+ 	   $form = new App_Form_SendSms();
+ 	
       
 	    if ($this->_request->isPost()) {
 	        
@@ -66,8 +70,8 @@ class IndexController extends Zend_Controller_Action
 
                 // Send a message with a specified originator and validity period.
                 $result = $sendService->SendMessageFull( 
-                    '07847440820,07847440820,07957606901',
-                    'This is a test from the test app - FUCK YEAH'
+                    $formData['number'],
+                    $formData['message']
                 );            
             }
             else {
@@ -76,12 +80,10 @@ class IndexController extends Zend_Controller_Action
     	    
 	    }
 	    
-	    // Show the form
-	    $form = new Form_SendSms();
        $this->view->form = $form;
         
 
-        
+        /**
         // View the results
         print_r( $result );
 
@@ -112,6 +114,7 @@ class IndexController extends Zend_Controller_Action
         		print( "<b>$messageID</b>: ".$messageStatus['MessageStatus']."<br /><br />" );
         	}
         }
+        **/
 	}
 
 }
