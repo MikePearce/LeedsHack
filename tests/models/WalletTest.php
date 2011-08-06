@@ -47,4 +47,15 @@ class WalletTest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue($thrown);
     }
+
+    public function testRename()
+    {
+        $data = array("foo" => 1, "bar" => 2);
+        $wallet = new Wallet($this->kvs, WalletCodec::get(), 'foo', $data);
+        $wallet->save('secret');
+        $wallet = Wallet::load($this->kvs, $this->codec, 'foo', 'secret');
+        $wallet->rename('secret', 'bar');
+        $wallet2 = Wallet::load($this->kvs, $this->codec, 'bar', 'secret');
+        $this->assertEquals($wallet, $wallet2);
+    }
 }

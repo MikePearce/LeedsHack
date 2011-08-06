@@ -65,4 +65,12 @@ class Wallet implements ArrayAccess
     {
         $this->store->save($this->id, $this->codec->encode($this->data, $passphrase));
     }
+
+    public function rename($passphrase, $newId)
+    {
+        $oldId = $this->id;
+        $this->id = $newId;
+        $this->save($passphrase);
+        $this->store->delete($oldId);
+    }
 }
