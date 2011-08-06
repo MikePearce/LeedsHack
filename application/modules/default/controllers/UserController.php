@@ -24,7 +24,13 @@ class UserController extends Zend_Controller_Action
     
     public function dashboardAction()
     {
-
+        $userSession = new Zend_Session_Namespace('userSession');
+        $this->view->flashMessage = $userSession->flashMessage;
+        // TODO: load the user's real list of tags
+        $tags = array(
+            'pin' => 1234,
+            'password' => 'secret'
+        );
     }
 
     public function xhrGetTagListAction()
@@ -95,18 +101,13 @@ class UserController extends Zend_Controller_Action
                         // Get wallet
                         $wallet = Wallet::open($userSession->number, $userSession->password);
                         $userSession->password = $formData['password'];
+                        $userSession->flashMessage = 'Your password has been changed.';
                         $wallet->save($formData['password']);
+                        $this->_redirect('/user');  
                     } 
-                    catch(WalletNotFound $e) {
-
-                        $form->getElement('number')->addError('This user cannot be found');
-                    }
                     catch(BadWalletPassword $e) {
                         $form->getElement('password')->addError('Your password is wrong, douche.');
                     }
-                        
-                    $this->view->flashMessage = 'Your password has been changed.';
-                    
                 }
                 else {
                     $form->getElement('currentPassword')->addError('This is not your password.');
@@ -148,19 +149,18 @@ class UserController extends Zend_Controller_Action
                    try {
                         // Get wallet
                         $wallet = Wallet::open($userSession->number, $userSession->password);
-                        $userSession->password = $formData['password'];
-                        $wallet->save($formData['password']);
+                        $wallet->rename($userSession->password, $formData['number']);
+                        $userSession->number = $formData['number'];
+                        $userSession->flashMessage = 'Your number has been changed.';
+                        $this->_redirect('/user');
                     } 
                     catch(WalletNotFound $e) {
-
                         $form->getElement('number')->addError('That is not your current number!');
                     }
-                     
-                    $this->view->flashMessage = 'Your number has been changed.';
-                    
+
                 }
                 else {
-                    $form->getElement('currentPassword')->addError('This is not your password.');
+                    $form->getElement('currentNumber')->addError('This is not your current number');
                 }
             }
             else {
