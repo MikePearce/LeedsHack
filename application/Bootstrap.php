@@ -67,6 +67,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$view = new Zend_View();
 		$view->doctype('HTML5');
 
+                $view->headMeta()->appendHttpEquiv('Content-Type','text/html;charset=UTF-8');
+
 		$view->addHelperPath('ZendX/JQuery/View/Helper/', 'ZendX_JQuery_View_Helper');
 		$view->jQuery()->enable();
 		$view->jQuery()->setVersion('1.5.2');
