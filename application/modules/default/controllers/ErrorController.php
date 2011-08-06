@@ -24,19 +24,32 @@ class ErrorController extends Zend_Controller_Action
 
 			default :
 				$exception = $errors->exception;
-				switch($exception->getCode()) {
-					case 400:
-						$this->getResponse()->setRawHeader('HTTP/1.1 400 Bad Request');
-						$content .= "<h1>Bad Request</h1>";
-					break;
-					case 403:
-						$content .= "<h1>Access Denied</h1>" . PHP_EOL;
-						$content .= "<p>You do not have sufficient right to access this page, 
-									if you believe this to be an error, please contact an 
-									administrator.</p>";
-					break;
-					default:
-					break;
+
+				if ($exception->getCode() == 403) {
+					$content .= "<h1>Access Denied</h1>" . PHP_EOL;
+					$content .= "<p>You do not have sufficient right to access this page, if you believe this to be an error, please contact an administrator.</p>";
+				} else {
+
+					$content .= "<h1>Error!</h1>" . PHP_EOL;
+					$content .= "<p>An unexpected error occurred with your request. We have been notified and will look into as soon as possible. Please try again later.</p>";
+$content .= "
+    <div id=error>
+        <p>
+            <ul class=errorList>
+                <li>
+                    <h4>Exception information:</h4>
+                    <p>". $exception->getMessage() ."</p>
+                </li>
+                <li>
+                    <h4>Stack trace:</h4>
+                    <p>". $exception->getTraceAsString() ."</p>
+                </li>
+               
+            </ul>
+        </p>
+    </div>
+";
+
 				}
 			break ;
 		}

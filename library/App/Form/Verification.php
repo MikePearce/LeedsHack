@@ -1,22 +1,21 @@
 <?
-class App_Form_Signup extends Zend_Form 
+class App_Form_Verification extends Zend_Form 
 { 
     public function __construct($options = null) 
     { 
         parent::__construct($options);
-        $this->setName('signup');
+        $this->setName('verification');
         
-        $this->setAction('/signup/')
+        $this->setAction('/signup/verification')
              ->setMethod('post');
 
         $number = new Zend_Form_Element_Text('number');
-        $number->setLabel('Your mobile number, dude...')
+        $number->setLabel('Verification number')
                 ->setRequired(true)
-                // Be nice to add a phone validator here...
                 ->addValidator('NotEmpty', true);
 
         $submit = new Zend_Form_Element_Submit('submit');
-        $submit->setLabel('Signup!');
+        $submit->setLabel('Submit');
 
         $this->addElements(array($number, $submit));
 
