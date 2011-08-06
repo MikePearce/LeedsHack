@@ -2,6 +2,25 @@
 
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
+    public function mapError($level, $message, $file, $line)
+    {
+         if(!($level & error_reporting())) return TRUE;
+
+         $bt = debug_backtrace();
+         array_shift($bt);
+
+         foreach($bt as $frame) {
+             if($frame['function'] == '__toString') return false;
+         }
+
+         throw new \ErrorException($message, 0, $level, $file, $line);
+    }
+
+    protected function _initErrorMapper()
+    {
+        set_error_handler(array($this, 'mapError'));
+        register_shutdown_function('restore_error_handler');
+    }
 
     //Hack for now to get modesl to autoload without the namespace
     protected function _initAutoLoader()
