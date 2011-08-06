@@ -32,13 +32,18 @@
         		</ul>
         	</div>
         	<div id="content">
+        	     <? if (isset($this->flashMessage)): ?>
+            		<div id="flashMessage">
+            		    <?= $this->flashMessage; ?>
+            		</div>
+        		<? endif; ?>
                 <?= $this->layout()->content ?>	
         	</div>
         	<div id="footer">
         		Copyright © Site name, 20XX
         	</div>
         </div>
-				
+       
 
 		<?= $this->jQuery() ?>
 		<?= $this->headScript() ?> 

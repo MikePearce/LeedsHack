@@ -1,12 +1,12 @@
 <?
 class App_Form_Newpassword extends Zend_Form 
 { 
-    public function __construct($options = null) 
+    public function __construct($options = null, $action = '/signup/password') 
     { 
         parent::__construct($options);
         $this->setName('newPassword');
         
-        $this->setAction('/signup/password')
+        $this->setAction($action)
              ->setMethod('post');
 
         $pass = new Zend_Form_Element_Password('password');

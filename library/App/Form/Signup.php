@@ -1,12 +1,12 @@
 <?
 class App_Form_Signup extends Zend_Form 
 { 
-    public function __construct($options = null) 
+    public function __construct($options = null, $action = '/signup/') 
     { 
         parent::__construct($options);
         $this->setName('signup');
         
-        $this->setAction('/signup/')
+        $this->setAction($action)
              ->setMethod('post');
 
         $number = new Zend_Form_Element_Text('number');
@@ -15,7 +15,7 @@ class App_Form_Signup extends Zend_Form
                 ->addValidator('NotEmpty', true);
 
         $submit = new Zend_Form_Element_Submit('submit');
-        $submit->setLabel('Signup!');
+        $submit->setLabel('Submit');
 
         $this->addElements(array($number, $submit));
 
