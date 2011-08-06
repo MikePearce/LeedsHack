@@ -5,10 +5,12 @@ class ActivityStream
 	{
 		try {
 			$db = Zend_Registry::get('db');
-		    return $db->select()
+		    $res = $db->select()
 			          ->from('activityStream')
 				      ->where('accountId = ? ', $accountId)
-				      ->fetchAll();
+				      ->query();
+				      
+			return $res->fetchAll();
 		} catch(Exception $e) {
 			throw new Zend_Db_Exception($e->getMessage(), $e->getCode());
 		}

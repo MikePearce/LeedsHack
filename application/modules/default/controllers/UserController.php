@@ -38,6 +38,8 @@ class UserController extends Zend_Controller_Action
     	$userSession = new Zend_Session_Namespace('userSession');
     	
     	$this->view->activitystream = ActivityStream::getByAccountId($userSession->number);
+    	
+    	$this->_helper->layout->disableLayout();
     }
     
     public function xhrTagAction()
