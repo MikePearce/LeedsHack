@@ -16,7 +16,7 @@ class Wallet implements ArrayAccess
     {
         try {
             $blob = $store->load($id);
-        } catch(ErrorException $e) {
+        } catch(Exception $e) {
             throw new WalletNotFound("Failed to open wallet with ID '{$id}'", 0, $e);
         }
 

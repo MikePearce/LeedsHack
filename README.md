@@ -9,3 +9,6 @@ Ben Spencer
 
 # Required extensions
 mcrypt
+
+# Optional extensions
+tokyo_tyrant
