@@ -18,15 +18,19 @@ class SignupController extends Zend_Controller_Action
             if ($form->isValid($formData)) {
                 
                 // OK, valid form data, see if there's a matching JSON
-                $kvs = new App_Model_Kvs();
+                $kvs = App_Model_Kvs::get('wallet');
                 if ($kvs->exists($formData['number']))
                 {
                     // Uh oh, you already have this shizzle
-                    
+                    $this->view->loginForm = new App_Form_Login();
+                    $this->render('exists');
                 }
                 else {
+                    // Create verification
+                    $verification = new App_Model_Verification($formData['number']);
+                    $verification->createToken()->sendToken();
                     
-                    // Send verification and show page
+                    // Then show the page
                     $this->view->form = new App_Form_Verification();
                     $this->render('verification');
                 }
