@@ -20,7 +20,12 @@ class Wallet implements ArrayAccess
             throw new WalletNotFound("Failed to open wallet with ID '{$id}'", 0, $e);
         }
 
-        return new self($store, $codec, $id, $codec->decode($blob, $passphrase));
+        $data = $codec->decode($blob, $passphrase);
+        if (is_null($data)) {
+            throw new BadWalletPassword("Bad password for wallet ID '{$id}'");
+        }
+
+        return new self($store, $codec, $id, $data);
     }
 
     protected $store;

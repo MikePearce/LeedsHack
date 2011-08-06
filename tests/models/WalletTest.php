@@ -30,4 +30,21 @@ class WalletTest extends PHPUnit_Framework_TestCase
     {
         Wallet::load($this->kvs, $this->codec, "foo", "secret");
     }
+
+    public function testBadPassword()
+    {
+        $wallet = new Wallet($this->kvs, WalletCodec::get(), 'foo');
+        $wallet->save('secret');
+
+        $thrown = false;
+        try {
+            Wallet::load($this->kvs, $this->codec, 'foo', 'password');
+        } catch(BadWalletPassword $e) {
+            $thrown = true;
+        }
+
+        $this->kvs->delete('foo');
+
+        $this->assertTrue($thrown);
+    }
 }
