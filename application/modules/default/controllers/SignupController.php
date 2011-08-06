@@ -73,15 +73,11 @@ class SignupController extends Zend_Controller_Action
                     // Create session
                     $userSession = new Zend_Session_Namespace('userSession');
                     $userSession->number = $formData['number'];
+
                     
-                    // Create wallet
-                    $wallet = Wallet::create($formData['number']);
-                    
-                    // Kill the verification
-                    $kvs->delete($formData['number']);
-                    
-                    // It does, huzzah!
-                    $this->_redirect('/user');
+                    // Now ask for a password
+                    $this->view->form = new App_Form_Newpassword();
+                    $this->render('password');
                 }
                 else {
                     // Uh oh...
@@ -91,6 +87,45 @@ class SignupController extends Zend_Controller_Action
                 
             }
         }
+    }
+    
+    public function passwordAction()
+    {
+        if ($this->_request->isPost()) {
+
+            $formData = $this->_request->getPost();
+            $form = new App_Form_Newpassword();
+
+            if ($form->isValid($formData))
+            {        
+                // Get the session
+                $userSession = new Zend_Session_Namespace('userSession');
+
+                // Get an instance of the kvs
+                $kvs = Kvs::get('token');
+
+                // Kill the verification
+                $kvs->delete($userSession->number);
+
+                // Create wallet
+                $wallet = Wallet::create($userSession->number);
+                $wallet->save($formData['password']);
+
+                $this->_redirect('/user');
+            }
+            else {
+                $form->populate($formData);
+                $this->view->form = $form;
+            }
+        }
+    }
+    
+    public function logoutAction()
+    {
+        $userSession = new Zend_Session_Namespace('userSession');
+        $userSession->unLock();
+        Zend_Session::namespaceUnset('userSession');
+        $this->_redirect('/');
     }
 }
 

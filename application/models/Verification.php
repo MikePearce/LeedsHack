@@ -39,8 +39,6 @@ class Verification {
             $this->number,
             "Your verification code: ". $this->token .". Love, SMSafe"
         );        
-        
-        var_dump($result);
     }
     
     
