@@ -22,7 +22,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         register_shutdown_function('restore_error_handler');
     }
 
-    //Hack for now to get modesl to autoload without the namespace
+    //Hack for now to get models to autoload without the namespace
     protected function _initAutoLoader()
     {
         Zend_Loader_Autoloader::getInstance()->setFallbackAutoloader(true);
@@ -93,6 +93,16 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 	{
 		$front = $this->getResource('FrontController');
 		$router = $front->getRouter();
+        
+        $route = new Zend_Controller_Router_Route(
+                '/user/tag/:tag',
+                        array(
+                                'module'        => 'default',
+                                'controller' => 'user',
+                                'action'     => 'tag'
+                        )
+        );
+        $router->addRoute('tag', $route);
 		return $router;
 	}
 }

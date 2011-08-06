@@ -17,18 +17,34 @@ class UserController extends Zend_Controller_Action
         $this->view->tags = $tags;
     }
 
-    public function tagDataAction()
+    public function tagAction()
     {
+        //HACK: Pull these from session
+        $id = '12345';
+        $pass = 'test';
+        
+        $wallet = Wallet::open($id, $pass);
+        
+        $form = new App_Form_TagData();
+        //open wallet
         $tag = $this->_request->getParam('tag');
-        if ($tag)
-        $form = new App_Form_TagData(); 
+        
+        if ($tag) {
+            if (isset($wallet[$tag])) {
+                $form->populate(array('tag' => $tag, 'tag_content' => $wallet[$tag]));
+            } else {
+                $form->populate(array('tag' => $tag));
+            }
+        }
         
         if ($this->_request->isPost()) {
             $formData = $this->_request->getPost();
             $form->populate($formData);
             if ($form->isValid($formData)) {
-               //Code for valid goes here
-            }            
+                $wallet[$form->getValue('tag')] = $form->getValue('tag_content');
+                $wallet->save($pass);
+                $this->_redirect('/user/dashboard');
+            }
         }
 
         $this->view->form =  $form;
