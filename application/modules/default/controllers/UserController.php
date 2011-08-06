@@ -4,7 +4,7 @@ class UserController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        $this->_redirect('dashboard');
+        $this->_redirect('/user/dashboard');
     }
     
     public function dashboardAction()
@@ -15,7 +15,6 @@ class UserController extends Zend_Controller_Action
     public function dataAction()
     {
        
-      
     }
 }
 
