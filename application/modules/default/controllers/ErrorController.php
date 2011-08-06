@@ -1,7 +1,6 @@
 <?php
 class ErrorController extends Zend_Controller_Action
 {
-
 	/**
 	 * This action handles
 	 *    - Application errors
