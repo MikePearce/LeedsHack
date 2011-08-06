@@ -1,6 +1,5 @@
 <?php $this->headTitle('User Dashboard') ?>
 <?php $this->headScript()->appendFile('/js/jquery.textareaCounter.plugin.js'); ?>
-<?php $this->headScript()->appendFile('/js/jquery.form.js'); ?>
 
 <?php $this->jquery()->onloadCaptureStart();?>
 
@@ -34,6 +33,7 @@
                 function(data) {
                     if (data === 'success') {
                         $('#tag-list-container').load('/user/xhr-get-tag-list');
+                        $('#activityStream').load('/user/xhr-get-activity-stream');
                         modal.dialog('close');
                         return;
                     }

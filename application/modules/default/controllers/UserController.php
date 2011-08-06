@@ -4,6 +4,7 @@ class UserController extends Zend_Controller_Action
     
     protected $wallet;
     protected $password;
+    protected $number;
     
     public function init()
     {
@@ -14,6 +15,7 @@ class UserController extends Zend_Controller_Action
         }
         $this->wallet = Wallet::open($userSession->number, $userSession->password);
         $this->password = $userSession->password;
+        $this->number = $userSession->number;
     }
     
     public function indexAction()
@@ -64,6 +66,8 @@ class UserController extends Zend_Controller_Action
             if ($form->isValid($formData)) {
                 $this->wallet[$form->getValue('tag')] = $form->getValue('tag_content');
                 $this->wallet->save($this->password);
+                ActivityStream::create($this->number, 'Edited data for tag "' . $form->getValue('tag'));
+	
                 $this->_helper->viewRenderer->setNoRender();
                 $this->getResponse()
                     ->appendBody('success');
