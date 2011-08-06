@@ -18,40 +18,11 @@ class IndexController extends Zend_Controller_Action
         
         // Show the form
  	   $this->view->form = new App_Form_Signup();  
+ 	   
+ 	   // Get the login form
+ 	   $this->view->loginForm = new App_Form_Login();
 
     }
-
-	public function inboxAction()
-	{
-        
-        // Essendex
-        $inBox = new Essendex_Inboxservice(
-            $this->essconf->username,
-            $this->essconf->password,
-            $this->essconf->accountref
-        );
-        
-    // Get the results
-       $result = $inBox->GetMessages();
-
-       // The messages
-       $messages = $result['Messages'];
-
-       // Print them
-       if ( !is_null( $messages ) )
-       {
-       	print "<br /><br />";
-       	foreach ( $messages as $message )
-       	{
-       		foreach ( $message as $key => $value )
-       		{
-       			print "<b>$key</b>: $value<br />";
-       		}
-
-       		print "<br />";
-       	}
-       }
-	}
 	
 	public function sendAction()
 	{
