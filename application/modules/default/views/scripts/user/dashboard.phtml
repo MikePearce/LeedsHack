@@ -1,4 +1,12 @@
 <?php $this->headTitle('User Dashboard') ?>
-
-
-User dashboard
+<h2>Your tags</h2>
+<ul class="taglist">
+<?php foreach ($this->tags as $name => $value): ?>
+<li>
+<a id="tag-<?php echo htmlentities($name); ?>" class="tag" href="#"><?php echo htmlentities($name); ?>
+</li>
+<?php endforeach; ?>
+<li>
+<a id="add-tag" class="tag" href="#">add new...</a>
+</li>
+</ul>

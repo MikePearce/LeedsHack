@@ -8,6 +8,13 @@ class UserController extends Zend_Controller_Action
     
     public function dashboardAction()
     {
+        // TODO: load the user's real list of tags
+        $tags = array(
+            'pin' => 1234,
+            'password' => 'secret'
+        );
+
+        $this->view->tags = $tags;
     }
 
     public function tagDataAction()
