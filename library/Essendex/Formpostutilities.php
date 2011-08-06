@@ -68,10 +68,19 @@ class Essendex_Formpostutilities
 	    // Are we in testmode?
         if ($this->essconf->testmode == 1)
         {   
-            $message = "TO: ". $dataStream['recipient'] ."\n". $dataStream['body'];
-            $app = $dataStream['originator'];
-            `/usr/local/bin/growlnotify -m "$message" -aVox.app "$app"`;
+            
+            // $app = $dataStream['originator'];
+            // `/usr/local/bin/growlnotify -m "$message" -aVox.app "$app"`;
+
+            $message = "[". date('Y/M/D H:i:s') ."] TO: ". $dataStream['recipient'] ."\n". $dataStream['body'] ."\n";
+            if ($handle = fopen('/tmp/esendex.log', 'a')) {
+                if (fwrite($handle, $message) === FALSE) {
+                    echo "Cannot write to file ($filename)";
+                    exit;
+                }
+            }
             $result = NULL;
+            
         }
         else {
 		    //$result = curl_exec( $curlHandle ); 						// run the whole process
