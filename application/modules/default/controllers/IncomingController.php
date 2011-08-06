@@ -2,9 +2,12 @@
 class IncomingController extends Zend_Controller_Action
 {
 	protected $account;
+	protected $essconf;
 	
 	public function init()
 	{	
+		$this->essconf = Zend_Registry::get('config')->essendex;
+		
 		$this->_helper->layout->disableLayout();
 		
 		$this->_helper->viewRenderer->setNoRender();
@@ -51,8 +54,17 @@ class IncomingController extends Zend_Controller_Action
 
 	}
 	
-	private function sendResponse()
+	private function sendResponse($response)
 	{
+		$sendService = new Essendex_Sendservice(
+			$this->essconf->username,
+			$this->essconf->password,
+			$this->essconf->accountref
+		);
 		
+		$result = $sendService->SendMessageFull(
+			$formData['number'],
+			$formData['message']
+		);  
 	}
 }
