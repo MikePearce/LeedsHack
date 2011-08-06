@@ -1,6 +1,6 @@
 <?php
 
-class Wallet implements ArrayAccess
+class Wallet implements ArrayAccess, IteratorAggregate
 {
     static public function create($id)
     {
@@ -72,5 +72,9 @@ class Wallet implements ArrayAccess
         $this->id = $newId;
         $this->save($passphrase);
         $this->store->delete($oldId);
+    }
+ 
+    public function getIterator() {
+        return new ArrayIterator($this->data);
     }
 }

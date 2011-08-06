@@ -110,7 +110,7 @@ class SignupController extends Zend_Controller_Action
                 // Create wallet
                 $wallet = Wallet::create($userSession->number);
                 $wallet->save($formData['password']);
-
+                $userSession->password = $formData['password'];
                 $this->_redirect('/user');
             }
             else {

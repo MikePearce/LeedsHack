@@ -1,0 +1,11 @@
+<ul class="taglist">
+<?php foreach ($this->tags as $name => $value): ?>
+    <li>
+        <a id="tag-<?= htmlentities($name); ?>" class="tag" href="/user/xhr-tag/tag/<?= htmlentities($name); ?>"><?= htmlentities($name); ?></a>
+    </li>
+<?php endforeach; ?>
+    <li>
+        <a id="add-tag" class="tag" href="/user/xhr-tag">add new...</a>
+    </li>
+</ul>
+

@@ -1,16 +1,60 @@
 <?php $this->headTitle('User Dashboard') ?>
+<?php $this->headScript()->appendFile('/js/jquery.textareaCounter.plugin.js'); ?>
+<?php $this->headScript()->appendFile('/js/jquery.form.js'); ?>
+
+<?php $this->jquery()->onloadCaptureStart();?>
+
+    $('#tag-list-container').load('/user/xhr-get-tag-list');
+
+    $('#tag').live('keyup', function() {
+        var value = $(this).val();
+        value = value.toLowerCase();
+        value = value.replace(/[^a-z0-9]/, '');
+        $(this).val(value);
+        return false;
+    });
+    
+    $('#tag_content').textareaCount({
+        'maxCharacterSize': 140,
+        'displayFormat' : '#left characters left'
+    });
+
+
+    $('.tag').live('click', function(event) {
+        var href = $(this).attr('href');
+        var modal = $('<div id="form-container"/>').load(href);
+       
+        modal.dialog();
+
+         $('#tagdata').live('submit', function() {   
+            $.post(
+                '/user/xhr-tag', 
+                { tag : $('#tag').val(), tag_content : $('#tag_content').val() }, 
+                function(data) {
+                    if (data === 'success') {
+                        $('#tag-list-container').load('/user/xhr-get-tag-list');
+                        modal.dialog('close');
+                        return;
+                    }
+                   
+                    $('#form-container').html(data);
+
+
+                }
+            );
+            return false; 
+        });
+        return false;
+    });
+<?php $this->jquery()->onloadCaptureEnd();?>
+
 <h2>Your tags</h2>
-<ul class="taglist">
-<?php foreach ($this->tags as $name => $value): ?>
-<li>
-<a id="tag-<?php echo htmlentities($name); ?>" class="tag" href="#"><?php echo htmlentities($name); ?>
-</li>
-<?php endforeach; ?>
-<li>
-<a id="add-tag" class="tag" href="#">add new...</a>
-</li>
-</ul>
+<div id='tag-list-container'>
+    
+</div>
 
 <h2>User details</h2>
 <a href="/user/changepassword">Change Password</a><br />
 <a href="/user/changenumber">Change Number</a><br />
+
+
