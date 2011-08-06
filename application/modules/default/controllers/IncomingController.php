@@ -30,13 +30,16 @@ class IncomingController extends Zend_Controller_Action
 				$reader->read();
 				$data[$nodeIndex] = $reader->value;
 			}
-
 		}
 		
 		//@todo add model account call when supplied.
 		$this->account = true;	
 		if($this->account) {
 			$messagetData = self::parseMessage($data['MessageText']);
+			
+			//@todo fetch tag data
+			//@todo checks if tag exists, if not send list of their tags?
+			//@todo send response.
 		} else {
 			//Account not recognised.
 			//@todo speak to team about how many failure messages we send?
@@ -48,10 +51,9 @@ class IncomingController extends Zend_Controller_Action
 		$parsed = array();
 		
 		//@todo make this more selective and work. As it is only a temp solution
-		preg_match_all('(?P<passphrase>\w+)\s(?P<tag>\w+)', $message, $parsed);
+		preg_match_all('(?P<passphrase>.+)\s(?P<tag>\w+)', $message, $parsed);
 		
 		return $parsed;
-
 	}
 	
 	private function sendResponse($response)
