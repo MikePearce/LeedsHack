@@ -2,11 +2,30 @@
 
 class WalletStoreTest extends PHPUnit_Framework_TestCase
 {
-    public function testStuff()
+    protected $store;
+
+    public function setUp()
     {
-        $s = new WalletStore();
-        $s->save("test", "foobar");
-        $this->assertEquals("foobar", $s->load("test"));
-        $s->delete("test");
+        $this->store = new WalletStore();
     }
+
+    public function testSaveAndLoad()
+    {
+        $this->store->save("test", "foobar");
+        $this->assertEquals("foobar", $this->store->load("test"));
+        $this->store->delete("test");
+    }
+
+    public function testExistsFalse()
+    {
+        $this->assertFalse($this->store->exists("nonexistent"));
+    }
+
+    public function testExistsTrue()
+    {
+        $this->store->save("test", "foobar");
+        $this->assertTrue($this->store->exists("test"));
+        $this->store->delete("test");
+    }
+
 }
