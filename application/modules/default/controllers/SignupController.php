@@ -31,7 +31,7 @@ class SignupController extends Zend_Controller_Action
                     $verification->createToken()->sendToken();
                     
                     // Then show the page
-                    $this->view->form = new App_Form_Verification();
+                    $this->view->form = new App_Form_Verification(null, $formData['number']);
                     $this->render('verification');
                 }
             }
@@ -46,8 +46,47 @@ class SignupController extends Zend_Controller_Action
 
     }
     
+    /**
+     * 1. Get form data
+     * 2. Check is valid
+     * 3. Open number file
+     * 4. Compare verification codes
+     **/
     public function verificationAction()
     {
+       if ($this->_request->isPost()) {
 
+            $formData = $this->_request->getPost();
+            $form = new App_Form_Verification(null, $formData['number']);
+
+            if ($form->isValid($formData)) {
+                
+                // Get an instance
+                $kvs = Kvs::get('token');
+                
+                // Get the code
+                $veriCode = $kvs->load($formData['number']);
+                
+                // Check it it matches
+                if ($veriCode == $formData['veriCode']) {
+                    // It does, huzzah!
+                    $this->_redirect('/user');
+                }
+                else {
+                    // Uh oh...
+                    $this->view->form = $form;  
+                    $this->render('nomatch');
+                }
+                
+            }
+        }
     }
 }
+
+
+
+
+
+
+
+

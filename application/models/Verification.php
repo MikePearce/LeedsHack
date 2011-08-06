@@ -37,7 +37,7 @@ class Verification {
         // Send a message with a specified originator and validity period.
         $result = $sendService->SendMessageFull( 
             $this->number,
-            $this->token
+            "Your verification code: ". $this->token .". Love, SMSafe"
         );        
         
         var_dump($result);
