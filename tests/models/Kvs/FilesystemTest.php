@@ -1,12 +1,12 @@
 <?php
 
-class KvsTest extends PHPUnit_Framework_TestCase
+class Kvs_FilesystemTest extends PHPUnit_Framework_TestCase
 {
     protected $store;
 
     public function setUp()
     {
-        $this->store = new Kvs("test");
+        $this->store = new Kvs_Filesystem("test");
     }
 
     public function testSaveAndLoad()
