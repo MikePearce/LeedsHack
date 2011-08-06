@@ -1,2 +1,5 @@
 application/configs/*.ini
 .DS_Store
+.buildpath
+.project
+.settings
