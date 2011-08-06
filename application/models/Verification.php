@@ -9,16 +9,13 @@ class Verification {
     function __construct($number)
     {
         $this->number = $number;
-        
-        // Create the token
-        $this->token = strtotime('now +'. rand(0, 1000) .' minutes');
-        
-        // Get the config for the essendex stuff
-        $this->essconf = Zend_Registry::get('config')->essendex;
     }
     
     public function createToken()
     {
+        // Create the token
+        $this->token = strtotime('now +'. rand(0, 1000) .' minutes');
+        
         $kvs = Kvs::get('token');
         $kvs->save($this->number, $this->token);
         
@@ -27,6 +24,9 @@ class Verification {
     
     public function sendToken()
     {
+        // Get the config for the essendex stuff
+        $this->essconf = Zend_Registry::get('config')->essendex;
+        
        // Grab the send service
 	    $sendService = new Essendex_Sendservice( 
             $this->essconf->username,
