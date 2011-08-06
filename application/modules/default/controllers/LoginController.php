@@ -22,6 +22,7 @@ class LoginController extends Zend_Controller_Action
                     // Create session
                     $userSession = new Zend_Session_Namespace('userSession');
                     $userSession->number = $formData['number'];
+                    $userSession->password = $formData['password'];
                     $this->_redirect('/user');
                 } 
                 catch(WalletNotFound $e) {

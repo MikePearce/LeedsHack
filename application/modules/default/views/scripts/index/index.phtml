@@ -6,6 +6,7 @@
         forgotten the pin number for your holiday credit card!
     </p>
 </div>
+<? if (!$this->isLoggedIn) : ?>
 <div id="ct_right">
     <span class="box_title"><h3>Signup Here!</h3></span>
     <p>
@@ -15,3 +16,4 @@
     <span class="box_title"><h3>Login!</h3></span>
     <?= $this->loginForm; ?>
 </div>
+<? endif; ?>
