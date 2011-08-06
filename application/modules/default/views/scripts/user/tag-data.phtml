@@ -1,0 +1,17 @@
+<?php $this->headTitle('Data Entry'); ?>
+<?php $this->headScript()->appendFile('/js/jquery.textareaCounter.plugin.js'); ?>
+
+<?php $this->jquery()->onloadCaptureStart();?>
+
+$('#tag_content').textareaCount({
+				'maxCharacterSize': 140,
+                'displayFormat' : '#left characters left'
+});
+<?php $this->jquery()->onloadCaptureEnd();?>
+
+<div id="ct_left">
+    <?= $this->form; ?>
+</div>
+<div id="ct_right">
+
+</div>

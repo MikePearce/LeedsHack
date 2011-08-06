@@ -3,6 +3,12 @@
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
 
+    //Hack for now to get modesl to autoload without the namespace
+    protected function _initAutoLoader()
+    {
+        Zend_Loader_Autoloader::getInstance()->setFallbackAutoloader(true);
+    }
+    
 	protected function _initConfig()
 	{
 		$configFile = APPLICATION_PATH . '/configs/config.ini';

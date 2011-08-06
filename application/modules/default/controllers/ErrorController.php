@@ -53,7 +53,7 @@ $content .= "
 				}
 			break ;
 		}
-
+        error_log($content);
 		// Clear previous content
 		$this->getResponse()->clearBody();
 		$this->view->content = $content;

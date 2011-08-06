@@ -1,8 +1,8 @@
-//Namespace and helper function for Portfolio Property
+//Namespace and helper function
 
 (function App(p) {
 
 
-} (App = {}))
+} (App = {}));
 
 
