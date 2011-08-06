@@ -69,6 +69,17 @@ class SignupController extends Zend_Controller_Action
                 
                 // Check it it matches
                 if ($veriCode == $formData['veriCode']) {
+                    
+                    // Create session
+                    $userSession = new Zend_Session_Namespace('userSession');
+                    $userSession->number = $formData['number'];
+                    
+                    // Create wallet
+                    $wallet = Wallet::create($formData['number']);
+                    
+                    // Kill the verification
+                    $kvs->delete($formData['number']);
+                    
                     // It does, huzzah!
                     $this->_redirect('/user');
                 }

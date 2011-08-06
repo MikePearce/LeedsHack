@@ -79,7 +79,7 @@ class Essendex_Formpostutilities
                     exit;
                 }
             }
-            $result = "Result=OK MessageIDs=f3d12395-dc07-4f08-b733-80b434815c43";
+            $result = "Result=OK MessageIDs=f3d12395-dc07-4f08-b733-80b434815c43 - THIS IS IN TEST MODE";
             
         }
         else {

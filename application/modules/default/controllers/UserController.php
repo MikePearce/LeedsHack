@@ -1,6 +1,15 @@
 <?php
 class UserController extends Zend_Controller_Action
 {
+    public function init()
+    {
+        // WHO GOES THERE!
+        $userSession = new Zend_Session_Namespace('userSession');
+        if (!$userSession->number) {
+            $this->_redirect('/login/');
+        }
+
+    }
     public function indexAction()
     {
         $this->_redirect('/user/dashboard');
