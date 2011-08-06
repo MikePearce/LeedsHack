@@ -47,6 +47,8 @@ class IncomingController extends Zend_Controller_Action
 		}
 		
 		$this->sendResponse($data['From'], $message);
+		
+		ActivityStream::create($data['From'], 'Requested data for tag "' . $tag . '" via SMS');
 	}
 	
 	private static function parseMessage($message)
@@ -71,7 +73,7 @@ class IncomingController extends Zend_Controller_Action
 			$response
 		);
 		
-		if (!isset($result['Result']) || $result['Result'] != "OK") {
+		if ((!isset($result['Result']) || $result['Result'] != "OK") && $this->essconf->testmode == 0) {
 			throw new MessageNotSent('Message failed to send with response for ID: ' . $number);	
 		}
 	}

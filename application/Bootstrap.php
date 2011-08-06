@@ -108,5 +108,18 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $router->addRoute('tag', $route);
 		return $router;
 	}
+	
+	protected function _initDb()
+    {
+		$db = $this->getPluginResource('db')->getDbAdapter();
+
+		$db->setFetchMode(Zend_Db::FETCH_OBJ);
+		$db->getConnection()->exec("SET NAMES 'utf8' COLLATE 'utf8_general_ci'");
+
+		Zend_Db_Table::setDefaultAdapter($db);
+		Zend_Registry::set('db', $db);
+
+        return $db;
+    }
 }
 
