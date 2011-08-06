@@ -61,7 +61,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
 		Zend_Registry::set('cache', $cache);
 	}
-
+	
 	protected function _initView()
 	{
 		$view = new Zend_View();
@@ -78,6 +78,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$view->jQuery()->addStyleSheet('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/ui-lightness/jquery-ui.css');
 
 		$view->jQuery()->addJavascriptFile('/js/app.js');
+		
+	    $userSession = new Zend_Session_Namespace('userSession');
+	    $view->isLoggedIn = ($userSession->number ? TRUE : FALSE);
 
 		Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer')->setView($view);
 		return $view;

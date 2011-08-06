@@ -12,17 +12,23 @@
 	    <div id="container">
         	<div id="header">
         		<h1>
-        			Text Wallet
+        			Text Wallet <?= intval($this->isLoggedIn); ?>
         		</h1>
         		<h2>When you've lost your shit, good old SMS to the rescue!
         	</div>
         	<div id="navigation">
         		<ul>
+        		    <? if (!$this->isLoggedIn): ?>
         			<li><a href="/">Home</a></li>
         			<li><a href="#">About</a></li>
         			<li><a href="/signup">Signup</a></li>
-        			<li><a href="#">Contact us</a></li>
+        			<li><a href="/signup/logout/">Logout</a></li>        		    
+        			<? else: ?>
+        			<li><a href="/">Home</a></li>
+        			<li><a href="#">About</a></li>
+        			<li><a href="/user">Your Dashboard</a></li>
         			<li><a href="/signup/logout/">Logout</a></li>
+        			<? endif; ?>
         		</ul>
         	</div>
         	<div id="content">
