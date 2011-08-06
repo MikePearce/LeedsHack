@@ -1,5 +1,8 @@
 <?php
 
+// Set the timezome
+date_default_timezone_set('Europe/London');
+
 // Define path to application directory
 defined('APPLICATION_PATH')
 	|| define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../application'));
@@ -16,7 +19,7 @@ set_include_path(implode(PATH_SEPARATOR, array(
 )));
 
 // Define the BASE_PATH
-define(BASE_PATH, realpath(dirname(__FILE__)));
+define('BASE_PATH', realpath(dirname(__FILE__) . '/../'));
 
 /** Zend_Application */
 require_once 'Zend/Application.php';

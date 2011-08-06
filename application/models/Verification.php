@@ -17,16 +17,16 @@ class App_Model_Verification {
         $this->essconf = Zend_Registry::get('config')->essendex;
     }
     
-    public function createVerification()
+    public function createToken()
     {
-        $kvs = get::Kvs('token');
+        $kvs = Kvs::get('token');
         $kvs->save($this->number, $this->token);
         // Generate random string
         
         return $string;
     }
     
-    public function sendVerification()
+    public function sendToken()
     {
        // Grab the send service
 	    $sendService = new Essendex_Sendservice( 
