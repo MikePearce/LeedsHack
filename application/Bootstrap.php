@@ -67,15 +67,15 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$view = new Zend_View();
 		$view->doctype('HTML5');
 
-                $view->headMeta()->appendHttpEquiv('Content-Type','text/html;charset=UTF-8');
+        $view->headMeta()->appendHttpEquiv('Content-Type','text/html;charset=UTF-8');
 
 		$view->addHelperPath('ZendX/JQuery/View/Helper/', 'ZendX_JQuery_View_Helper');
 		$view->jQuery()->enable();
 		$view->jQuery()->setVersion('1.5.2');
 
 		$view->jQuery()->UiEnable();
-		$view->jQuery()->setUiVersion('1.8.6');
-		$view->jQuery()->addStyleSheet('/themes/redmond/jquery-ui.custom.css');
+		$view->jQuery()->setUiVersion('1.8.14');
+		$view->jQuery()->addStyleSheet('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/ui-lightness/jquery-ui.css');
 
 		$view->jQuery()->addJavascriptFile('/js/app.js');
 
