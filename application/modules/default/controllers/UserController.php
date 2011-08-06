@@ -25,6 +25,11 @@ class UserController extends Zend_Controller_Action
 
         $this->view->tags = $tags;
     }
+    
+    public function numberAction()
+    {
+    	var_dump('Hello :)');exit;
+    }
 
     public function tagAction()
     {

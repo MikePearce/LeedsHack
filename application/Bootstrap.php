@@ -106,6 +106,17 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                         )
         );
         $router->addRoute('tag', $route);
+        
+        $route = new Zend_Controller_Router_Route(
+                        '/user/change-number',
+                                array(
+                                        'module'        => 'default',
+                                        'controller' => 'user',
+                                        'action'     => 'number'
+                                )
+                );
+
+                $router->addRoute('changeNumber', $route);
 		return $router;
 	}
 	
