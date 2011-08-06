@@ -8,6 +8,7 @@ Matt Williams
 Ben Spencer
 
 # Required extensions
+curl
 mcrypt
 
 # Optional extensions
