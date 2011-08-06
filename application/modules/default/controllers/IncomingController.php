@@ -27,6 +27,7 @@ class IncomingController extends Zend_Controller_Action
 				$reader->read();
 				$data[$nodeIndex] = $reader->value;
 			}
+
 		}
 		
 		//@todo add model account call when supplied.
@@ -47,6 +48,7 @@ class IncomingController extends Zend_Controller_Action
 		preg_match_all('(?P<passphrase>\w+)\s(?P<tag>\w+)', $message, $parsed);
 		
 		return $parsed;
+
 	}
 	
 	private function sendResponse()
