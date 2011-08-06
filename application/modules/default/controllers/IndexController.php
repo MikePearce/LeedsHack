@@ -14,6 +14,10 @@ class IndexController extends Zend_Controller_Action
     
     public function indexAction()
     {
+        $this->view->pageTitle = "Mooop!";
+        
+        // Show the form
+ 	   $this->view->form = new App_Form_Signup();  
 
     }
 

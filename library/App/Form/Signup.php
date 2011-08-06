@@ -12,9 +12,9 @@ class App_Form_Signup extends Zend_Form
                 ->addValidator('NotEmpty', true);
 
         $submit = new Zend_Form_Element_Submit('submit');
-        $submit->setLabel('Send Message');
+        $submit->setLabel('Signup!');
 
-        $this->addElements(array($number, $message, $submit));
+        $this->addElements(array($number, $submit));
 
     } 
 }

@@ -1,6 +1,32 @@
-<h2>ZOMG! What's my pin number?</h2>
-<p>
-    We've all done it right? Stuck on the continent, mobile provider charging
-    huge amounts of money for roaming data and you've forgotten the pin
-    number for your holiday credit card!
-</p>
+<style type="text/css">
+#ct_left {
+    width: 650px;
+    float: left;
+}
+#ct_right {
+    width: 200px;
+    margin-left: 660px;
+    border: 2px solid red;
+    padding: 10px;
+}
+.box_title {
+    padding: 10px;
+    background-color: orange;
+    display: block;
+}
+.box_title h3 {
+    display: inline;
+}
+</style>
+<div id="ct_left">
+    <h2>ZOMG! What's my pin number?</h2>
+    <p>
+        We've all done it right? Stuck on the continent, mobile provider
+        charging huge amounts of money for roaming data and you've 
+        forgotten the pin number for your holiday credit card!
+    </p>
+</div>
+<div id="ct_right">
+    <span class="box_title"><h3>Signup Here!</h3></span>
+    <?= $this->form; ?>
+</div>

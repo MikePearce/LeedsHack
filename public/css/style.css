@@ -71,3 +71,9 @@ body {
 #header h2 {
     font-size: 0.8em;
 }
+
+/** Zend form resetters **/
+.zend_form dt, .zend_form dd {
+    margin: 0;
+    padding: 0;
+} 
