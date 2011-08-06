@@ -79,11 +79,11 @@ class Essendex_Formpostutilities
                     exit;
                 }
             }
-            $result = NULL;
+            $result = "Result=OK MessageIDs=f3d12395-dc07-4f08-b733-80b434815c43";
             
         }
         else {
-		    //$result = curl_exec( $curlHandle ); 						// run the whole process
+		    $result = curl_exec( $curlHandle ); 						// run the whole process
 		}
 
 		curl_setopt( $curlHandle, CURLOPT_RETURNTRANSFER, 1 );

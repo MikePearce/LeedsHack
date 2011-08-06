@@ -1,6 +1,6 @@
 <?php
 
-class App_Model_Verification {
+class Verification {
     
     private $token;
     private $essconf;
@@ -21,9 +21,8 @@ class App_Model_Verification {
     {
         $kvs = Kvs::get('token');
         $kvs->save($this->number, $this->token);
-        // Generate random string
         
-        return $string;
+        return $this;
     }
     
     public function sendToken()

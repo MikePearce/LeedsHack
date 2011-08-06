@@ -1,6 +1,6 @@
 <?php
 
-class App_Model_Kvs
+class Kvs
 {
     static public function get($db)
     {
