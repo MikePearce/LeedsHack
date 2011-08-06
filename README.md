@@ -6,3 +6,7 @@ Mike Pearce <mike@mikepearce.net>
 Wayne Crouch
 Matt Williams
 Ben Spencer
+
+# Required extensions
+mcrypt
+mhash
