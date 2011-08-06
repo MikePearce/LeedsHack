@@ -1,11 +1,11 @@
 <style type="text/css">
 #ct_left {
-    width: 650px;
+    width: 630px;
     float: left;
 }
 #ct_right {
-    width: 200px;
-    margin-left: 660px;
+    width: 220px;
+    margin-left: 640px;
     border: 2px solid red;
     padding: 10px;
 }
@@ -16,6 +16,13 @@
 }
 .box_title h3 {
     display: inline;
+}
+label {
+    font-weight: bold;
+}
+input[type=text] {
+    font-size: 1.5em;
+    padding: 5px;
 }
 </style>
 <div id="ct_left">
@@ -29,6 +36,7 @@
 <div id="ct_right">
     <span class="box_title"><h3>Signup Here!</h3></span>
     <p>
-        
+        Enter your mobile number and hit 'Signup!', we'll do the rest!
+    </p>
     <?= $this->form; ?>
 </div>

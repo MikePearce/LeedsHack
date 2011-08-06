@@ -5,9 +5,12 @@ class App_Form_Signup extends Zend_Form
     { 
         parent::__construct($options);
         $this->setName('signup');
+        
+        $this->setAction('/signup/')
+             ->setMethod('post');
 
         $number = new Zend_Form_Element_Text('number');
-        $number->setLabel('Telephone Number')
+        $number->setLabel('Your mobile number, dude...')
                 ->setRequired(true)
                 ->addValidator('NotEmpty', true);
 
