@@ -36,6 +36,6 @@ class WalletCodec
 
     protected function getKey($passphrase)
     {
-        return mhash(MHASH_SHA256, $passphrase);
+        return hash('sha256', $passphrase, true);
     }
 }

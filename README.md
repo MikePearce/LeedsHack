@@ -9,4 +9,3 @@ Ben Spencer
 
 # Required extensions
 mcrypt
-mhash
