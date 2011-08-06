@@ -82,39 +82,6 @@ class IndexController extends Zend_Controller_Action
 	    
        $this->view->form = $form;
         
-
-        /**
-        // View the results
-        print_r( $result );
-
-        // Split the message IDs into an array.
-        $messageIDs = split( ",", $result['MessageIDs'] );
-
-        if ( !is_null( $messageIDs ) && sizeof( $messageIDs ) > 0 )
-        {
-        	print( "<br /><br />" );
-
-        	foreach ( $messageIDs as $messageID )
-        	{
-        		print( "<b>Message ID</b>: $messageID<br />" );
-        	}
-
-        	print( "<br /><hr /><br />" );
-
-        	// Get the status of the sent message(s).
-        	print( "<b>GetMessageStatus</b><br />" );
-        	foreach ( $messageIDs as $messageID )
-        	{
-        		$messageStatus = $sendService->GetMessageStatus( $messageID );
-
-        		print_r( $messageStatus );
-
-        		print( "<br /><br />" );
-
-        		print( "<b>$messageID</b>: ".$messageStatus['MessageStatus']."<br /><br />" );
-        	}
-        }
-        **/
 	}
 
 }

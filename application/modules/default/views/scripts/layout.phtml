@@ -4,23 +4,34 @@
 		<?= $this->headMeta(); ?>
 			
 		<?= $this->headTitle(); ?>
-		
 		<link href="/css/style.css" rel="stylesheet" type="text/css" />
 		<?= $this->headLink(); ?>
 	</head>
 	
 	<body>
-	    <div id="header">
-	        <h1>Super Awesome App</h1>
-    	    <div id="navigation">
-        	    <ul>
-        	        <li><a href="/">Home</a></li>
-        	        <li><a href="/index/inbox">Inbox</a></li>
-        	        <li><a href="/index/send">Send Message</a></li>
-        	    </ul>
-    	    </div>
-    	</div>
-		<?= $this->layout()->content ?>			
+	    <div id="container">
+        	<div id="header">
+        		<h1>
+        			Text Wallet
+        		</h1>
+        		<h2>When you've lost your shit, good old SMS to the rescue!
+        	</div>
+        	<div id="navigation">
+        		<ul>
+        			<li><a href="#">Home</a></li>
+        			<li><a href="#">About</a></li>
+        			<li><a href="#">Signup</a></li>
+        			<li><a href="#">Contact us</a></li>
+        		</ul>
+        	</div>
+        	<div id="content">
+                <?= $this->layout()->content ?>	
+        	</div>
+        	<div id="footer">
+        		Copyright © Site name, 20XX
+        	</div>
+        </div>
+				
 
 		<?= $this->jQuery() ?>
 		<?= $this->headScript() ?> 
