@@ -4,8 +4,8 @@ USE `leedshack`;
 CREATE TABLE IF NOT EXISTS `activityStream` (
 	id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	accountId VARCHAR(255) NOT NULL,
-	`date` TIMESTAMP(8),
+	`date` TIMESTAMP,
 	`message` TEXT,
 	INDEX(accountId),
 	INDEX(`date`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
