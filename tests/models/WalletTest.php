@@ -13,5 +13,7 @@ class WalletTest extends PHPUnit_Framework_TestCase
 
         $wallet2 = Wallet::load($kvs, $codec, "foo", "secret");
         $this->assertEquals($wallet, $wallet2);
+
+        $kvs->delete('foo');
     }
 }
