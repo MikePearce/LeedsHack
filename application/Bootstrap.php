@@ -37,22 +37,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		Zend_Registry::set('cache', $cache);
 	}
 
-	protected function _initDb()
-	{
-		$db = $this->getPluginResource('db')->getDbAdapter();
-
-		$db->setFetchMode(Zend_Db::FETCH_OBJ);
-		$db->getConnection()->exec("SET NAMES 'utf8' COLLATE 'utf8_general_ci'");
-
-		Zend_Db_Table::setDefaultAdapter($db);
-		Zend_Registry::set('db', $db);
-
-		return $db;
-	}
-
 	protected function _initView()
 	{
-
 		$view = new Zend_View();
 		$view->doctype('HTML5');
 
