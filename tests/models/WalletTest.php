@@ -2,18 +2,32 @@
 
 class WalletTest extends PHPUnit_Framework_TestCase
 {
+    protected $kvs;
+    protected $codec;
+
+    public function setUp()
+    {
+        $this->kvs = Kvs::get('test');
+        $this->codec = WalletCodec::get();
+    }
+
     public function testSaveAndLoad()
     {
-        $kvs = Kvs::get('test');
-        $codec = WalletCodec::get();
-
         $data = array("foo" => 1, "bar" => 2);
-        $wallet = new Wallet($kvs, WalletCodec::get(), "foo", $data);
+        $wallet = new Wallet($this->kvs, WalletCodec::get(), "foo", $data);
         $wallet->save("secret");
 
-        $wallet2 = Wallet::load($kvs, $codec, "foo", "secret");
+        $wallet2 = Wallet::load($this->kvs, $this->codec, "foo", "secret");
         $this->assertEquals($wallet, $wallet2);
 
-        $kvs->delete('foo');
+        $this->kvs->delete('foo');
+    }
+
+    /**
+     * @expectedException WalletNotFound
+     */
+    public function testLoadNotFound()
+    {
+        Wallet::load($this->kvs, $this->codec, "foo", "secret");
     }
 }

@@ -14,7 +14,13 @@ class Wallet implements ArrayAccess
 
     static public function load(Kvs $store, WalletCodec $codec, $id, $passphrase)
     {
-        return new self($store, $codec, $id, $codec->decode($store->load($id), $passphrase));
+        try {
+            $blob = $store->load($id);
+        } catch(ErrorException $e) {
+            throw new WalletNotFound("Failed to open wallet with ID '{$id}'", 0, $e);
+        }
+
+        return new self($store, $codec, $id, $codec->decode($blob, $passphrase));
     }
 
     protected $store;
