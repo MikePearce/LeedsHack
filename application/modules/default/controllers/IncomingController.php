@@ -1,7 +1,6 @@
 <?php
 class IncomingController extends Zend_Controller_Action
 {
-	protected $account;
 	protected $essconf;
 	
 	public function init()
@@ -32,18 +31,22 @@ class IncomingController extends Zend_Controller_Action
 			}
 		}
 		
-		//@todo add model account call when supplied.
-		$this->account = true;	
-		if($this->account) {
-			$messagetData = self::parseMessage($data['MessageText']);
+		$messageData = self::parseMessage($data['MessageText']);
+		
+		$wallet = Wallet::open($data['From'], $messageData['passphrase'][0]);
+		
+		$tag = trim(strtolower($messageData['tag'][0]));
+		
+		if (isset($wallet[$tag])) {
 			
-			//@todo fetch tag data
-			//@todo checks if tag exists, if not send list of their tags?
-			//@todo send response.
+			$message = 'Your SMSafe information for tag "' .
+					   $tag .'":  ' . $wallet[$tag];
 		} else {
-			//Account not recognised.
-			//@todo speak to team about how many failure messages we send?
+			$message = 'Sorry, no data found for tag "'.
+					   $tag . '" on SMSafe';
 		}
+		
+		$this->sendResponse($data['From'], $message);
 	}
 	
 	private static function parseMessage($message)
@@ -51,12 +54,11 @@ class IncomingController extends Zend_Controller_Action
 		$parsed = array();
 		
 		//@todo make this more selective and work. As it is only a temp solution
-		preg_match_all('(?P<passphrase>.+)\s(?P<tag>\w+)', $message, $parsed);
-		
+		preg_match_all('!(?P<passphrase>.+)\s(?P<tag>\w+)!', $message, $parsed);
 		return $parsed;
 	}
 	
-	private function sendResponse($response)
+	private function sendResponse($number, $response)
 	{
 		$sendService = new Essendex_Sendservice(
 			$this->essconf->username,
@@ -65,8 +67,8 @@ class IncomingController extends Zend_Controller_Action
 		);
 		
 		$result = $sendService->SendMessageFull(
-			$formData['number'],
-			$formData['message']
-		);  
+			$number,
+			$response
+		);
 	}
 }
