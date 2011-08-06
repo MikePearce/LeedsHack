@@ -1,10 +1,17 @@
 <?php
 
-class WalletStore
+class Kvs
 {
-    static public function get()
+    static public function get($db)
     {
-        return new self;
+        return new self($db);
+    }
+
+    protected $db;
+
+    public function __construct($db)
+    {
+        $this->db = $db;
     }
 
     public function exists($id)
@@ -29,6 +36,6 @@ class WalletStore
 
     protected function getPath($id)
     {
-        return BASE_PATH . "/data/{$id}";
+        return BASE_PATH . "/data/{$this->db}/{$id}";
     }
 }

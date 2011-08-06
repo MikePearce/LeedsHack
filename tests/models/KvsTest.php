@@ -1,12 +1,12 @@
 <?php
 
-class WalletStoreTest extends PHPUnit_Framework_TestCase
+class KvsTest extends PHPUnit_Framework_TestCase
 {
     protected $store;
 
     public function setUp()
     {
-        $this->store = new WalletStore();
+        $this->store = new Kvs("test");
     }
 
     public function testSaveAndLoad()
