@@ -5,6 +5,7 @@
 <?php $this->jquery()->onloadCaptureStart();?>
 
     $('#tag-list-container').load('/user/xhr-get-tag-list');
+    $('#activityStream').load('/user/xhr-get-activity-stream');
 
     $('#tag').live('keyup', function() {
         var value = $(this).val();
@@ -51,6 +52,10 @@
 <h2>Your tags</h2>
 <div id='tag-list-container'>
     
+</div>
+<h2>Activity Stream</h2>
+<div id="activityStream">
+
 </div>
 
 <h2>User details</h2>

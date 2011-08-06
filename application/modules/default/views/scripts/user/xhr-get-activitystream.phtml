@@ -1,0 +1,9 @@
+	<?php if (is_array($this->activitystream) && !empty($this->activitystream)) :?>
+		<ul class="activityStream">
+			<?php foreach ($this->activitystream as $activity):?>
+				<li><?= $activity->message;?></li>
+			<?php endforeach;?>
+		</ul>
+	<?php else:?>
+		<p>No recent activity recorded</p>
+	<?php endif;?>

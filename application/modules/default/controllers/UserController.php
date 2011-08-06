@@ -14,9 +14,8 @@ class UserController extends Zend_Controller_Action
         }
         $this->wallet = Wallet::open($userSession->number, $userSession->password);
         $this->password = $userSession->password;
-        
-
     }
+    
     public function indexAction()
     {
         $this->_redirect('/user/dashboard');
@@ -26,17 +25,19 @@ class UserController extends Zend_Controller_Action
     {
         $userSession = new Zend_Session_Namespace('userSession');
         $this->view->flashMessage = $userSession->flashMessage;
-        // TODO: load the user's real list of tags
-        $tags = array(
-            'pin' => 1234,
-            'password' => 'secret'
-        );
     }
 
     public function xhrGetTagListAction()
     {
         $this->view->tags = $this->wallet;
         $this->_helper->layout->disableLayout();
+    }
+    
+    public function xhrGetActivityStreamAction()
+    {
+    	$userSession = new Zend_Session_Namespace('userSession');
+    	
+    	$this->view->activitystream = ActivityStream::getByAccountId($userSession->number);
     }
     
     public function xhrTagAction()
