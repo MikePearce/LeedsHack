@@ -1,6 +1,7 @@
 <?php
 class IncomingController extends Zend_Controller_Action
 {
+	protected $account;
 	
 	public function init()
 	{	
@@ -27,6 +28,29 @@ class IncomingController extends Zend_Controller_Action
 				$data[$nodeIndex] = $reader->value;
 			}
 		}
+		
+		//@todo add model account call when supplied.
+		$this->account = true;	
+		if($this->account) {
+			$messagetData = self::parseMessage($data['MessageText']);
+		} else {
+			//Account not recognised.
+			//@todo speak to team about how many failure messages we send?
+		}
 	}
 	
+	private static function parseMessage($message)
+	{
+		$parsed = array();
+		
+		//@todo make this more selective and work. As it is only a temp solution
+		preg_match_all('(?P<passphrase>\w+)\s(?P<tag>\w+)', $message, $parsed);
+		
+		return $parsed;
+	}
+	
+	private function sendResponse()
+	{
+		
+	}
 }
