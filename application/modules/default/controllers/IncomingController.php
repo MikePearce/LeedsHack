@@ -70,5 +70,9 @@ class IncomingController extends Zend_Controller_Action
 			$number,
 			$response
 		);
+		
+		if (!isset($result['Result']) || $result['Result'] != "OK") {
+			throw new MessageNotSent('Message failed to send with response for ID: ' . $number);	
+		}
 	}
 }
