@@ -21,11 +21,14 @@ class IndexController extends Zend_Controller_Action
  	   
  	   // Get the login form
  	   $this->view->loginForm = new App_Form_Login();
-
     }
     
     public function aboutAction()
     {
+    	$this->view->form = new App_Form_Signup();
+    	
+    	$this->view->loginForm = new App_Form_Login();
+    	
     	$this->view->pageTitle = "Abooooot";
     }
 	
