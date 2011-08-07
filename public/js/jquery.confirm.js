@@ -23,7 +23,7 @@
                 confirm.dialog('close');
             });
 
-            $('#confirm-button').live('click', function() {
+            $('#confirm-button').live('click', function() { 
                 $.post(container.attr('href'), {});
 
                 confirm.dialog('close');
