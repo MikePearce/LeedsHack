@@ -130,13 +130,18 @@ class IncomingController extends Zend_Controller_Action
     
     protected function help($number, $wallet, $messageData)
     {
+<<<<<<< HEAD
         $message = 'Possible actions are: get, add, update, delete, listTags. You need to send your password an action and'
+=======
+        $message = 'Possible actions are: get, add, update, delete, help. You need to send your password an action and'
+>>>>>>> Add more methods to sms listener, eg add, delete
             . ' a tag for all actions. Eg. pass1234 add bankdetails Account Number 123456. Get can be done just by'
             . ' password and tag.';
 
 		$this->sendResponse($number, $message);
     }
     
+<<<<<<< HEAD
     protected function listtags($number, $wallet, $messageData)
     {
         $tags = array();
@@ -150,6 +155,9 @@ class IncomingController extends Zend_Controller_Action
     }
     
 	protected function sendResponse($number, $response)
+=======
+	private function sendResponse($number, $response)
+>>>>>>> Add more methods to sms listener, eg add, delete
 	{
 		$sendService = new Essendex_Sendservice(
 			$this->essconf->username,
