@@ -26,9 +26,16 @@
     <a href="/user/changenumber">change your phone number</a>.
     
 </p>
-
-<?php if ($this->wallet->isEnabled()) : ?>
-<a href="/user/xhr-disable-account" id='disable-account'>Disable Account</a><br />
-<?php else : ?>
-<a href="/user/xhr-reenable-account" id='enable-account'>Re-enable Account</a><br />
-<?php endif; ?>
+<h2>Lost your phone?</h2>
+<p>
+   If you've lost your phone, or had it stolen. Disable your account to stop
+   thieves and pirates getting hold of your valuables! 
+</p>
+<p>
+    Click here to <strong>
+    <?php if ($this->wallet->isEnabled()) : ?>
+    <a href="/user/xhr-disable-account" id='disable-account'>disable your account</a>
+    <?php else : ?>
+    <a href="/user/xhr-reenable-account" id='enable-account'>re-enable your account</a>
+    <?php endif; ?></strong>.
+</p>
