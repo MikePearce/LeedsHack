@@ -6,21 +6,17 @@ class ActivityStream
 	{
 		try {
 			$db = Zend_Registry::get('db');
-		    $select = $db->select()
-			          ->from('activityStream')
-				      ->where('accountId = ? ', $accountId);
-            
-            if ($limit) {
-                $select->limit($limit, 0);
-            }
 
-            $res = $select->query();
+            $res = $select->query()
+				      ->where('accountId = ? ', $accountId)
+				      ->order('date DESC')
+			      	  ->limit(10)
+				      ->query();
 				      
 			return $res->fetchAll();
 		} catch(Exception $e) {
 			throw new Zend_Db_Exception($e->getMessage(), $e->getCode());
 		}
-		
 	}
 	
 	public static function create($accountId, $message)
