@@ -8,8 +8,9 @@ class LoginController extends Zend_Controller_Action
     
     public function indexAction()
     {
+        $form = new App_Form_Login();
       if ($this->_request->isPost()) {
-            $form = new App_Form_Login();
+
 
             if ($form->isValid($this->_request->getPost())) {
 
@@ -41,6 +42,7 @@ class LoginController extends Zend_Controller_Action
             }
 
         }
+        $this->view->form = $form;  
     }
 
 }

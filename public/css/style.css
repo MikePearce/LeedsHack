@@ -1,6 +1,9 @@
 body {
-    font-family: helvetica, sans-serif;
-    font-size: 12px;
+    font-family: 'Lato', cursive;
+    font-size: 14px;
+}
+.bodyimage {
+    padding-left: 10px;
 }
 #container
 {
@@ -11,17 +14,37 @@ body {
 
 #header
 {
-	background: #ccc;
 	padding: 20px;
+	border-top-right-radius: 20px;
+	-moz-border-top-right-radius: 20px;
+	border-top-left-radius: 20px;
+	-moz-border-top-left-radius: 20px;
+	background: #FFC200 url(/images/safeicon.png) no-repeat 10px 15px;
+	padding-left: 120px;
+	color: #730046;
 }
 
-#header h1 { margin: 0; }
+h1, h2, h3, h4 {
+    font-family: 'Lato', sans-serif;
+}
+#header h1 { 
+    margin: 0; 
+    font-size: 4em;
+        font-family: 'Bowlby One SC', cursive;
+}
+
+#header h2 {
+    font-size: 1.2em;
+    font-family: 'Carme', sans-serif;
+    padding: 0;
+    margin-top: -10px;
+}
 
 #navigation
 {
 	float: left;
 	width: 920px;
-	background:#333;
+	background: #C93C00;
 }
 
 #navigation ul
@@ -63,35 +86,37 @@ body {
 
 #footer
 {
-	background:#ccc;
+	background:#FFC200;
 	text-align: right;
 	padding: 20px;
 	height: 1%;
+		color: #730046;
 }
-#header h2 {
-    font-size: 0.8em;
-}
+
 
 /** Zend form resetters **/
 .zend_form dt, .zend_form dd {
     margin: 0;
     padding: 0;
 } 
-
+input[type=text], input[type=password] {
+    font-size: 1.4em;
+    padding: 5px;
+}
 /** // Zend Form **/
 #ct_left {
-    width: 630px;
+    width: 600px;
     float: left;
 }
 #ct_right {
-    width: 220px;
-    margin-left: 640px;
-    border: 2px solid red;
+    width: 230px;
+    margin-left: 630px;
+    border: 2px solid #C93C00;
     padding: 10px;
 }
 .box_title {
     padding: 10px;
-    background-color: orange;
+    background-color: #FFC200;
     display: block;
 }
 .box_title h3 {
@@ -100,10 +125,7 @@ body {
 label {
     font-weight: bold;
 }
-input[type=text], input[type=password] {
-    font-size: 1.5em;
-    padding: 5px;
-}
+
 #flashMessage {
     position: absolute;
     top: 125px;
@@ -139,15 +161,8 @@ li.taglist-item a {
     text-decoration: none;
 }
 
-
-
-
 li.taglist-item a.delete-tag {
     float:right;
-}
-
-ul.activityStream {
-    
 }
 
 #tag-list-container {
@@ -159,7 +174,10 @@ ul.activityStream {
     width:70%;
 }
 
-
+ul.activityStream {
+    margin: 0;
+    padding: 0;
+}
 
 li.activityStream-event {
     display:block;
@@ -167,4 +185,12 @@ li.activityStream-event {
     padding:5px;
     margin:5px;
     background-color: #ddd;
+}
+
+p.small {
+    font-size: 0.7em;
+}
+span.brand_name {
+    font-family: 'Bowlby One SC', cursive;
+    font-size: 0.8em;
 }

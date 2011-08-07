@@ -5,6 +5,7 @@
 			
 		<?= $this->headTitle(); ?>
 		<link href="/css/style.css" rel="stylesheet" type="text/css" />
+		<link href='http://fonts.googleapis.com/css?family=Carme|Lato:300|Gloria+Hallelujah|Bowlby+One+SC' rel='stylesheet' type='text/css'>
 		<?= $this->headLink(); ?>
 	</head>
 	
@@ -13,7 +14,7 @@
 	    <div id="container">
         	<div id="header">
         		<h1>
-        			Text Wallet
+        			SMSafe
         		</h1>
         		<h2>When you've lost your shit, good old SMS to the rescue!
         	</div>
@@ -23,6 +24,7 @@
         			<li><a href="/">Home</a></li>
         			<li><a href="/about/">About</a></li>
         			<li><a href="/signup/">Signup</a></li>       		    
+        			<li><a href="/login/">Login</a></li>
         			<? else: ?>
         			<li><a href="/">Home</a></li>
         			<li><a href="/about/">About</a></li>
@@ -40,7 +42,7 @@
                 <?= $this->layout()->content ?>	
         	</div>
         	<div id="footer">
-        		Copyright © Site name, 20XX
+        		Team A-FTW, LeedsHack2, August 2011.
         	</div>
                     
         </div>
