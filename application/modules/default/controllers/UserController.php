@@ -51,6 +51,7 @@ class UserController extends Zend_Controller_Action
             unset($this->wallet[$tag]);
         }
         $this->wallet->save($this->password);
+        ActivityStream::create($this->number, 'Deleted tag ' . $tag);
         $this->_helper->viewRenderer->setNoRender();
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender();
