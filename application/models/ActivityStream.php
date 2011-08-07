@@ -31,4 +31,16 @@ class ActivityStream
 		}
 		
 	}
+	
+	public static function changeNumber($oldId, $newId)
+	{
+	    try {
+			$db = Zend_Registry::get('db');
+			$where = $db->quoteInto('accountId = ?', $oldId);
+			$db->update('activityStream', array(
+				'accountId' => $newId), $where);
+		} catch (Exception $e) {
+			throw new Zend_Db_Exception($e->getMessage(), $e->getCode());
+		}
+	}
 }

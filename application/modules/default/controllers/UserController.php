@@ -171,12 +171,19 @@ class UserController extends Zend_Controller_Action
                 if ($userSession->number == $formData['currentNumber'])
                 {
                    try {
+
+                        // Update the activity stream (This is not scalable)
+                        ActivityStream::changeNumber($userSession->number, $formData['number']);
+                        
                         // Get wallet
                         $wallet = Wallet::open($userSession->number, $userSession->password);
                         $wallet->rename($userSession->password, $formData['number']);
+                                                
+                        // Store
                         $userSession->number = $formData['number'];
                         $userSession->flashMessage = 'Your number has been changed.';
                         
+                        // Save
                         ActivityStream::create($userSession->number, 'Changed your mobile number to '.$userSession->number);
                         
                         $this->_redirect('/user');
