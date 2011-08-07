@@ -131,7 +131,7 @@ class IncomingController extends Zend_Controller_Action
     
     protected function help($number, $wallet, $messageData)
     {
-        $message = 'Use: {password} get|add|update|delete|listTags. You need to send your password, an action and'
+        $message = 'Use: {password} get,add,update,delete,listtags. You need to send your password, an action and'
             . ' a tag for all actions. Much love, SMSafe';
 
 		$this->sendResponse($number, $message);
