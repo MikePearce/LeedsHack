@@ -96,6 +96,18 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 	{
 		$front = $this->getResource('FrontController');
 		$router = $front->getRouter();
+		
+		$route = new Zend_Controller_Router_Route(
+			'about',
+			array(
+				'module'        => 'default',
+				'controller' => 'index',
+				'action'     => 'about'
+			)
+        );
+        
+        $router->addRoute('about', $route);
+        
 		return $router;
 	}
 	

@@ -1,0 +1,19 @@
+<div id="ct_left">
+    <h2>Aboooooot</h2>
+    <p>
+        We've all done it right? Stuck on the continent, mobile provider
+        charging huge amounts of money for roaming data and you've 
+        forgotten the pin number for your holiday credit card!
+    </p>
+</div>
+<? if (!$this->isLoggedIn) : ?>
+<div id="ct_right">
+    <span class="box_title"><h3>Signup Here!</h3></span>
+    <p>
+        Enter your mobile number and hit 'Signup!', we'll do the rest!
+    </p>
+    <?= $this->form; ?>
+    <span class="box_title"><h3>Login!</h3></span>
+    <?= $this->loginForm; ?>
+</div>
+<? endif; ?>

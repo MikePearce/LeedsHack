@@ -31,6 +31,7 @@ class LoginController extends Zend_Controller_Action
                 }
                 catch(BadWalletPassword $e) {
                     $form->getElement('password')->addError('Your password is wrong, douche.');
+                    ActivityStream::create($userSession->number, 'Failed login attempt');
                 }
                 
                 // Uh oh...

@@ -23,6 +23,11 @@ class IndexController extends Zend_Controller_Action
  	   $this->view->loginForm = new App_Form_Login();
 
     }
+    
+    public function aboutAction()
+    {
+    	$this->view->pageTitle = "Abooooot";
+    }
 	
 	public function sendAction()
 	{

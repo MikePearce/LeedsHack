@@ -110,6 +110,9 @@ class UserController extends Zend_Controller_Action
                         $userSession->password = $formData['password'];
                         $userSession->flashMessage = 'Your password has been changed.';
                         $wallet->save($formData['password']);
+                        
+                        ActivityStream::create($userSession->number, 'Changed your password');
+                        
                         $this->_redirect('/user');  
                     } 
                     catch(BadWalletPassword $e) {
@@ -159,12 +162,14 @@ class UserController extends Zend_Controller_Action
                         $wallet->rename($userSession->password, $formData['number']);
                         $userSession->number = $formData['number'];
                         $userSession->flashMessage = 'Your number has been changed.';
+                        
+                        ActivityStream::create($userSession->number, 'Changed your mobile number to '.$userSession->number);
+                        
                         $this->_redirect('/user');
                     } 
                     catch(WalletNotFound $e) {
                         $form->getElement('number')->addError('That is not your current number!');
                     }
-
                 }
                 else {
                     $form->getElement('currentNumber')->addError('This is not your current number');
