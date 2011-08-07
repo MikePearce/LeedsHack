@@ -1,7 +1,8 @@
-	<?php if (is_array($this->activitystream) && !empty($this->activitystream)) :?>
+	<h2>Activity Stream</h2>
+    <?php if (is_array($this->activitystream) && !empty($this->activitystream)) :?>
 		<ul class="activityStream">
 			<?php foreach ($this->activitystream as $activity):?>
-				<li><?= $activity->date ?> - <?= $activity->message;?></li>
+				<li class='activityStream-event'><?= $activity->date ?> - <?= $activity->message;?></li>
 			<?php endforeach;?>
 		</ul>
 	<?php else:?>

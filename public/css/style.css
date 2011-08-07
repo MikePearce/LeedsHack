@@ -124,3 +124,47 @@ textarea#tag_content {
     width:200px;
     height:100px;
 }
+
+
+li.taglist-item {
+    display:block;
+    border:1px solid grey;
+    padding:5px;
+    margin:5px;
+    background-color: #ddd;
+    width:150px;
+}
+
+li.taglist-item a {
+    text-decoration: none;
+}
+
+
+
+
+li.taglist-item a.delete-tag {
+    float:right;
+}
+
+ul.activityStream {
+    
+}
+
+#tag-list-container {
+    float: left;
+}
+
+#activityStream {
+    float:right;
+    width:70%;
+}
+
+
+
+li.activityStream-event {
+    display:block;
+    border:1px solid grey;
+    padding:5px;
+    margin:5px;
+    background-color: #ddd;
+}
