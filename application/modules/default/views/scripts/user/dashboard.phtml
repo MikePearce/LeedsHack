@@ -40,19 +40,13 @@
         
     });
     
-    $('#tag_content').textareaCount({
-        'maxCharacterSize': 140,
-        'displayFormat' : '#left characters left'
-    });
-
-
     $('.tag').live('click', function(event) {
         var href = $(this).attr('href');
         var modal = $('<div id="form-container"/>').load(href);
        
         modal.dialog();
-
-         $('#tagdata').live('submit', function() {   
+        
+        $('#tagdata').live('submit', function() {   
             $.post(
                 '/user/xhr-tag', 
                 { tag : $('#tag').val(), tag_content : $('#tag_content').val() }, 

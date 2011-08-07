@@ -37,9 +37,9 @@
 		var numLeft = 0;
 		var numWords = 0;
 				
-		container.bind('keyup', function(event){limitTextAreaByCharacterCount();})
-				 .bind('mouseover', function(event){setTimeout(function(){limitTextAreaByCharacterCount();}, 10);})
-				 .bind('paste', function(event){setTimeout(function(){limitTextAreaByCharacterCount();}, 10);});
+		container.live('keyup', function(event){limitTextAreaByCharacterCount();})
+				 .live('mouseover', function(event){setTimeout(function(){limitTextAreaByCharacterCount();}, 10);})
+				 .live('paste', function(event){setTimeout(function(){limitTextAreaByCharacterCount();}, 10);});
 		
 		
 		function limitTextAreaByCharacterCount(){
