@@ -133,7 +133,6 @@ h3 {
 } 
 input[type=text], input[type=password] {
     font-size: 1.4em;
-    padding: 5px;
 }
 label {
     font-size: 1.5em;
@@ -274,6 +273,11 @@ textarea#tag_content {
   -moz-box-shadow: 0 2px 5px #000;
   -webkit-box-shadow: 0 2px 5px #000;
   box-shadow: 0 2px 5px #000;
+}
+
+.smsafenumber {
+    font-size: 1.3em;
+    font-weight: bold;
 }
 
 

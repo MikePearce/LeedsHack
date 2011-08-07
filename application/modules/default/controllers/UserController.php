@@ -225,5 +225,10 @@ class UserController extends Zend_Controller_Action
         $this->getResponse()
             ->appendBody('success');
     }
+    
+    public function helpAction()
+    {
+        
+    }
 }
 
