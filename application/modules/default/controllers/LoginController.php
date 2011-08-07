@@ -9,20 +9,18 @@ class LoginController extends Zend_Controller_Action
     public function indexAction()
     {
       if ($this->_request->isPost()) {
-
-            $formData = $this->_request->getPost();
             $form = new App_Form_Login();
 
-            if ($form->isValid($formData)) {
+            if ($form->isValid($this->_request->getPost())) {
 
                 try {
                     // Get wallet
-                    Wallet::open($formData['number'], $formData['password']);
+                    Wallet::open($form->getValue('number'), $form->getValue('password'));
 
                     // Create session
                     $userSession = new Zend_Session_Namespace('userSession');
-                    $userSession->number = $formData['number'];
-                    $userSession->password = $formData['password'];
+                    $userSession->number = $form->getValue('number');
+                    $userSession->password = $form->getValue('password');
                     $this->_redirect('/user');
                 } 
                 catch(WalletNotFound $e) {
@@ -31,7 +29,7 @@ class LoginController extends Zend_Controller_Action
                 }
                 catch(BadWalletPassword $e) {
                     $form->getElement('password')->addError('Your password is wrong, douche.');
-                    ActivityStream::create($formData['number'], 'Failed login attempt');
+                    ActivityStream::create($form->getValue('number');, 'Failed login attempt');
                 }
                 
                 // Uh oh...

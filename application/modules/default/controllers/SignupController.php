@@ -12,14 +12,12 @@ class SignupController extends Zend_Controller_Action
         $form = new App_Form_Signup();
 
         if ($this->_request->isPost()) {
-
-            $formData = $this->_request->getPost();
             
-            if ($form->isValid($formData)) {
+            if ($form->isValid($this->_request->getPost())) {
                 
                 // OK, valid form data, see if there's a matching JSON
                 $kvs = Kvs::get('wallet');
-                if ($kvs->exists($formData['number']))
+                if ($kvs->exists($form->getValue('number')))
                 {
                     // Uh oh, you already have this shizzle
                     $this->view->loginForm = new App_Form_Login();
@@ -27,16 +25,16 @@ class SignupController extends Zend_Controller_Action
                 }
                 else {
                     // Create verification
-                    $verification = new Verification($formData['number']);
+                    $verification = new Verification($form->getValue('number'));
                     $verification->createToken()->sendToken();
                     
                     // Then show the page
-                    $this->view->form = new App_Form_Verification(null, $formData['number']);
+                    $this->view->form = new App_Form_Verification(null, $form->getValue('number'));
                     $this->render('verification');
                 }
             }
             else {
-                $form->populate($formData);
+                $form->populate($this->_request->getPost());
                 $this->view->form = $form;     
             }
         }

@@ -7,7 +7,8 @@ class ActivityStream
 		try {
 			$db = Zend_Registry::get('db');
 
-            $res = $select->query()
+            $res = $db->select()
+            		  ->from('activityStream')
 				      ->where('accountId = ? ', $accountId)
 				      ->order('date DESC')
 			      	  ->limit(10)

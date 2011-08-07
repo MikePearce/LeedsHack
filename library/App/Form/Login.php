@@ -12,7 +12,8 @@ class App_Form_Login extends Zend_Form
         $number = new Zend_Form_Element_Text('number');
         $number->setLabel('Your mobile number')
                 ->setRequired(true)
-                ->addValidator('NotEmpty', true);
+                ->addValidator('NotEmpty', true)
+                ->addFilter(new App_Filter_MobileNumber());
 
         $password = new Zend_Form_Element_Password('password');                
         $password->setLabel('Your password')
