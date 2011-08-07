@@ -1,6 +1,9 @@
 body {
     font-family: 'Lato', cursive;
     font-size: 14px;
+    background: #474747 url(/images/bg.png);
+    color: #ffffff;
+    margin: 0; padding: 0;
 }
 .bodyimage {
     padding-left: 10px;
@@ -9,44 +12,58 @@ body {
 {
 	margin: 0 auto;
 	width: 920px;
-	background: #fff;
 }
-
 #header
 {
-	padding: 20px;
-	border-top-right-radius: 20px;
-	-moz-border-top-right-radius: 20px;
-	border-top-left-radius: 20px;
-	-moz-border-top-left-radius: 20px;
-	background: #FFC200 url(/images/safeicon.png) no-repeat 10px 15px;
+    clear: left;
+    padding: 20px;
 	padding-left: 120px;
-	color: #730046;
+	background: transparent url(/images/safeicon.png) no-repeat 10px 15px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
 }
 
 h1, h2, h3, h4 {
     font-family: 'Lato', sans-serif;
+    color: #ffffff;
+}
+h3 {
+    font-size: 1.4em;
 }
 #header h1 { 
+	display: block; 
+	text-decoration: none;
+    color: #ccc; 
+    text-shadow: 0px 3px 8px #2a2a2a;
     margin: 0; 
+    padding: 0;
     font-size: 4em;
-        font-family: 'Bowlby One SC', cursive;
+    font-family: 'Bowlby One SC', cursive;
 }
 
 #header h2 {
-    font-size: 1.2em;
+    font-size: 1.5em;
     font-family: 'Carme', sans-serif;
     padding: 0;
-    margin-top: -10px;
+    margin-top: -15px;
+    color: #222;
+    text-shadow: 0px 2px 3px #555;
+
 }
 
 #navigation
 {
+    width: 100%;
 	float: left;
-	width: 920px;
-	background: #C93C00;
+	text-align: center;
+	background: #666;
 }
+#subNav {
+    margin: auto;
+    width: 920px;
+    height: 20px;
 
+}
 #navigation ul
 {
 	margin: 0;
@@ -57,18 +74,22 @@ h1, h2, h3, h4 {
 {
 	list-style-type: none;
 	display: inline;
+	
 }
 
 #navigation li a
 {
 	display: block;
 	float: left;
-	padding: 5px 10px;
-	color:#fff;
+	padding: 10px 20px;
+    color:#111;
 	text-decoration: none;
-	border-right: 1px solid#fff;
-}
+	border-right: 1px solid #fff;
 
+}
+#navigation li a.first {
+    border-left: 1px solid #fff;
+}
 #navigation li a:hover { background:#383; }
 
 #content
@@ -76,21 +97,32 @@ h1, h2, h3, h4 {
 	clear: left;
 	padding: 20px;
 }
+#footer a, #content a {
+    color: #fff;
+}
+
+#footer a:hover, #content a:hover {
+    color: #383;
+}
 
 #content h2
 {
-	color:#000;
+	color:#fff;
 	font-size: 160%;
 	margin: 0 0 .5em;
+		font-weight: 100;
 }
 
 #footer
 {
-	background:#FFC200;
+
 	text-align: right;
 	padding: 20px;
 	height: 1%;
-		color: #730046;
+	color: #fff;
+	font-size: 0.8em;
+	/** border-top: 1px solid #333; **/
+    padding-top: 10px;
 }
 
 
@@ -103,6 +135,9 @@ input[type=text], input[type=password] {
     font-size: 1.4em;
     padding: 5px;
 }
+label {
+    font-size: 1.5em;
+}
 /** // Zend Form **/
 #ct_left {
     width: 600px;
@@ -111,16 +146,21 @@ input[type=text], input[type=password] {
 #ct_right {
     width: 230px;
     margin-left: 630px;
-    border: 2px solid #C93C00;
+    border: 1px solid #333;
     padding: 10px;
 }
 .box_title {
-    padding: 10px;
-    background-color: #FFC200;
-    display: block;
+    display: block;    
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
 }
 .box_title h3 {
     display: inline;
+    color: #fff;
+
+    font-weight: 100;
+    margin: 0; padding: 0;
+
 }
 label {
     font-weight: bold;
@@ -192,5 +232,45 @@ p.small {
 }
 span.brand_name {
     font-family: 'Bowlby One SC', cursive;
-    font-size: 0.8em;
+    color: #ccc;
+    	font-weight: 100;
+}
+
+h1.signup {
+    font-size: 2em;
+    font-family: 'Carme', sans-serif;
+    padding: 0;
+    color: #222;
+    text-shadow: 0px 2px 3px #555;
+
+}
+p.signup {
+    font-size: 1.4em;
+}
+.shadow {
+  -moz-box-shadow: 0 2px 5px #000;
+  -webkit-box-shadow: 0 2px 5px #000;
+  box-shadow: 0 2px 5px #000;
+}
+
+
+.clearfix:after {
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+}
+ 
+.clearfix {
+	display: inline-block;
+}
+ 
+html[xmlns] .clearfix {
+	display: block;
+}
+ 
+* html .clearfix {
+	height: 1%;
 }

@@ -5,35 +5,38 @@
 			
 		<?= $this->headTitle(); ?>
 		<link href="/css/style.css" rel="stylesheet" type="text/css" />
-		<link href='http://fonts.googleapis.com/css?family=Carme|Lato:300|Gloria+Hallelujah|Bowlby+One+SC' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Carme|Lato:300,100|Gloria+Hallelujah|Bowlby+One+SC' rel='stylesheet' type='text/css'>
 		<?= $this->headLink(); ?>
 	</head>
 	
 	<body>
-    
-	    <div id="container">
-        	<div id="header">
-        		<h1>
-        			SMSafe
-        		</h1>
-        		<h2>When you've lost your shit, good old SMS to the rescue!
-        	</div>
-        	<div id="navigation">
+    	<div id="navigation" class="shadow">
+    	    <div id="subNav">
         		<ul>
         		    <? if (!$this->isLoggedIn): ?>
-        			<li><a href="/">Home</a></li>
+        			<li><a class="first" href="/">Home</a></li>
         			<li><a href="/about/">About</a></li>
         			<li><a href="/signup/">Signup</a></li>       		    
         			<li><a href="/login/">Login</a></li>
         			<? else: ?>
-        			<li><a href="/">Home</a></li>
+        			<li><a class="first" href="/">Home</a></li>
         			<li><a href="/about/">About</a></li>
         			<li><a href="/user/">Your Dashboard</a></li>
         			<li><a href="/signup/logout/">Logout</a></li>
         			<? endif; ?>
         		</ul>
         	</div>
-        	<div id="content">
+    	</div>
+	    <div id="container">
+        
+        	<div id="header">
+        		<h1>
+        			SMSafe
+        		</h1>
+        		<h2>When you've lost your shit, good old SMS to the rescue!
+        	</div>
+        
+        	<div id="content"  class='clearfix'>
         	     <? if (isset($this->flashMessage)): ?>
             		<div id="flashMessage">
             		    <?= $this->flashMessage; ?>
@@ -42,7 +45,7 @@
                 <?= $this->layout()->content ?>	
         	</div>
         	<div id="footer">
-        		Team A-FTW, LeedsHack2, August 2011.
+        		<a href="#">Terms</a> | <a href="#">Privacy</a> | Team A-FTW, LeedsHack2, August 2011.
         	</div>
                     
         </div>
