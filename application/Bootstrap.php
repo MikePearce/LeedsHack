@@ -75,7 +75,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
 		$view->jQuery()->UiEnable();
 		$view->jQuery()->setUiVersion('1.8.14');
-		$view->jQuery()->addStyleSheet('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/ui-lightness/jquery-ui.css');
+		$view->jQuery()->addStyleSheet('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/vader/jquery-ui.css');
 
 		$view->jQuery()->addJavascriptFile('/js/app.js');
 		

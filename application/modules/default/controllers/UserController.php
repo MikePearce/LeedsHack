@@ -203,5 +203,10 @@ class UserController extends Zend_Controller_Action
         }
         $this->view->form = $form;
     }
+    
+    public function detailsAction()
+    {
+        
+    }
 }
 

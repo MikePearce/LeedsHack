@@ -94,7 +94,7 @@ h3 {
 
 #content
 {
-	clear: left;
+
 	padding: 20px;
 }
 #footer a, #content a {
@@ -187,13 +187,15 @@ textarea#tag_content {
     height:100px;
 }
 
-
+#tag-list-container ul {
+    margin: 0;
+    padding: 0;
+}
 li.taglist-item {
     display:block;
-    border:1px solid grey;
+    border-bottom: 1px solid #222;
     padding:5px;
     margin:5px;
-    background-color: #ddd;
     width:150px;
 }
 
@@ -210,8 +212,8 @@ li.taglist-item a.delete-tag {
 }
 
 #activityStream {
-    float:right;
-    width:70%;
+    margin-left: 230px;
+    
 }
 
 ul.activityStream {
@@ -221,10 +223,11 @@ ul.activityStream {
 
 li.activityStream-event {
     display:block;
-    border:1px solid grey;
+    border-bottom :1px solid #222;
     padding:5px;
     margin:5px;
-    background-color: #ddd;
+
+    width: 640px;
 }
 
 p.small {
@@ -236,7 +239,11 @@ span.brand_name {
     	font-weight: 100;
 }
 
-h1.signup {
+#dashboard {
+
+}
+
+#dashboard h1, h1.signup {
     font-size: 2em;
     font-family: 'Carme', sans-serif;
     padding: 0;
@@ -247,6 +254,22 @@ h1.signup {
 p.signup {
     font-size: 1.4em;
 }
+
+/** MODAL **/
+#form-container label {
+    font-size: 0.8em;
+}
+#form-container input[type=text] {
+    font-size: 1.4em;
+    width: 240px;
+}
+textarea#tag_content {
+    width: 250px;
+    height: 200px;
+}
+.ui-widget-header { border: 1px solid #e78f08; background: none; color: #ffffff; font-weight: bold; }
+
+/** MODAL **/
 .shadow {
   -moz-box-shadow: 0 2px 5px #000;
   -webkit-box-shadow: 0 2px 5px #000;
