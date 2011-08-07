@@ -3,8 +3,11 @@
 
 <?php $this->jquery()->onloadCaptureStart();?>
 
-    $('#tag-list-container').load('/user/xhr-get-tag-list');
-    $('#activityStream').load('/user/xhr-get-activity-stream');
+    function loadContent() {    
+        $('#tag-list-container').load('/user/xhr-get-tag-list');
+        $('#activityStream').load('/user/xhr-get-activity-stream');
+    };
+    loadContent();
 
     $('#tag').live('keyup', function() {
         var value = $(this).val();
@@ -12,6 +15,29 @@
         value = value.replace(/[^a-z0-9]/, '');
         $(this).val(value);
         return false;
+    });
+    
+    $('.delete-tag').live('click', function() {
+        var tag = $(this).attr('id').replace(/delete\-/, '');
+        var confirm = $('<div id="delete-message">'
+            + '<p>Are you sure you want to delete the tag ' + tag + '</p>'
+            + '<button id="confirm-delete">Delete</button>'
+            + '<button id="cancel-delete">Cancel</button>'
+            + '</div>');
+            confirm.dialog();
+        
+        $('#cancel-delete').live('click', function() {
+            confirm.dialog('close');
+        });
+        
+        $('#confirm-delete').live('click', function() {
+            $.post('/user/xhr-delete-tag/tag/' + tag, {});        
+            loadContent();
+            confirm.dialog('close');
+            
+        });
+        return false;
+        
     });
     
     $('#tag_content').textareaCount({
@@ -32,8 +58,7 @@
                 { tag : $('#tag').val(), tag_content : $('#tag_content').val() }, 
                 function(data) {
                     if (data === 'success') {
-                        $('#tag-list-container').load('/user/xhr-get-tag-list');
-                        $('#activityStream').load('/user/xhr-get-activity-stream');
+                        loadContent();
                         modal.dialog('close');
                         return;
                     }
@@ -61,5 +86,8 @@
 <h2>User details</h2>
 <a href="/user/changepassword">Change Password</a><br />
 <a href="/user/changenumber">Change Number</a><br />
+
+
+
 
 

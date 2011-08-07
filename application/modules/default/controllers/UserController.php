@@ -44,9 +44,22 @@ class UserController extends Zend_Controller_Action
     	$this->_helper->layout->disableLayout();
     }
     
+    public function xhrDeleteTagAction()
+    {
+        $tag = $this->_request->getParam('tag');
+        if (isset($this->wallet[$tag])) {
+            unset($this->wallet[$tag]);
+        }
+        $this->wallet->save($this->password);
+        $this->_helper->viewRenderer->setNoRender();
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender();
+        $this->getResponse()
+            ->appendBody('success');
+    }
+    
     public function xhrTagAction()
     {
-        
         $form = new App_Form_TagData();
         $form->setAttrib('action', '/user/xhr-tag');
         //open wallet
@@ -66,7 +79,7 @@ class UserController extends Zend_Controller_Action
             if ($form->isValid($formData)) {
                 $this->wallet[$form->getValue('tag')] = $form->getValue('tag_content');
                 $this->wallet->save($this->password);
-                ActivityStream::create($this->number, 'Edited data for tag "' . $form->getValue('tag'));
+                ActivityStream::create($this->number, 'Edited data for tag ' . $form->getValue('tag'));
 	
                 $this->_helper->viewRenderer->setNoRender();
                 $this->getResponse()

@@ -119,3 +119,8 @@ input[type=text], input[type=password] {
     z-index:100;
     
 }
+
+textarea#tag_content {
+    width:200px;
+    height:100px;
+}
