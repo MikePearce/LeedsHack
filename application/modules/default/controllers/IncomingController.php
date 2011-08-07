@@ -3,12 +3,19 @@ class IncomingController extends Zend_Controller_Action
 {
 	protected $essconf;
 	
+    protected $allowedActions = array(
+        'update',
+        'get',
+        'help',
+        'delete',
+        'add'
+    );
+    
 	public function init()
 	{	
 		$this->essconf = Zend_Registry::get('config')->essendex;
 		
 		$this->_helper->layout->disableLayout();
-		
 		$this->_helper->viewRenderer->setNoRender();
 		
 		if (!$this->_request->isPost()) {
@@ -29,16 +36,85 @@ class IncomingController extends Zend_Controller_Action
 				$reader->read();
 				$data[$nodeIndex] = $reader->value;
 			}
+        }
+        
+		$messageData = $this->parseMessage($data['MessageText']);
+        $wallet = Wallet::open($data['From'], $messageData['passphrase']);
+        
+        $this->{$messageData['action']}($data['From'] , $wallet, $messageData);
+	}
+	
+	protected function parseMessage($message)
+	{
+		$parsed = array();
+		
+        $message = preg_replace('/\s\s+/', ' ', $message);
+        
+        $parts = explode(' ', $message);
+        
+        if (!count($parts) > 1) {
+            return array();
+        }
+        
+        $parsed['passphrase'] = $parts[0];
+        if (in_array(strtolower($parts[1]), $this->allowedActions)) {
+            $parsed['action'] = strtolower($parts[1]);
+        } else {
+            $parsed['action'] = 'get';
+            $parsed['tag'] = strtolower($parts[1]);
+        }
+        
+        if (count($parts) > 2 && $parts[1] == $parsed['action']) {
+            $parsed['tag'] = strtolower($parts[2]);
+        }
+        
+        if (count($parts) > 3 && $parts[1] == $parsed['action']) {
+            $parsed['content'] = implode(' ', array_slice($parts, 3));
+        }
+        
+		return $parsed;
+	}
+	
+    protected function update($number, $wallet, $messageData) 
+    {
+        $tag = $messageData['tag'];
+        $wallet[$tag] = $messageData['content'] ?: '';
+        $wallet->save($messageData['passphrase']);
+       
+        $message = 'Information for tag "' .
+           $tag . ' stored successfully!';
+		
+		$this->sendResponse($number, $message);
+		
+		ActivityStream::create($number, 'Updated content for tag "' . $tag . '" via SMS');
+    }
+    
+    protected function add($number, $wallet, $messageData)
+    {
+        $this->update($number, $wallet, $messageData);
+    }
+    
+    
+    protected function delete($number, $wallet, $messageData)
+    {
+        $tag = $messageData['tag'];
+        
+        if (isset($wallet[$tag])) {
+            unset($wallet[$tag]);
+            $wallet->save($messageData['passphrase']);
+			$message = 'Information for tag "' .
+               $tag . ' deleted successfully!';
 		}
 		
-		$messageData = self::parseMessage($data['MessageText']);
+		$this->sendResponse($number, $message);
 		
-		$wallet = Wallet::open($data['From'], $messageData['passphrase'][0]);
-		
-		$tag = trim(strtolower($messageData['tag'][0]));
-		
-		if (isset($wallet[$tag])) {
-			
+		ActivityStream::create($number, 'Deleted content for tag "' . $tag . '" via SMS');
+    }
+    
+    protected function get($number, $wallet, $messageData) 
+    {
+        $tag = $messageData['tag'];
+        if (isset($wallet[$tag])) {
 			$message = 'Your SMSafe information for tag "' .
 					   $tag .'":  ' . $wallet[$tag];
 		} else {
@@ -46,20 +122,20 @@ class IncomingController extends Zend_Controller_Action
 					   $tag . '" on SMSafe';
 		}
 		
-		$this->sendResponse($data['From'], $message);
+		$this->sendResponse($number, $message);
 		
-		ActivityStream::create($data['From'], 'Requested data for tag "' . $tag . '" via SMS');
-	}
-	
-	private static function parseMessage($message)
-	{
-		$parsed = array();
-		
-		//@todo make this more selective and work. As it is only a temp solution
-		preg_match_all('!(?P<passphrase>.+)\s(?P<tag>\w+)!', $message, $parsed);
-		return $parsed;
-	}
-	
+		ActivityStream::create($number, 'Requested data for tag "' . $tag . '" via SMS');
+    }
+    
+    protected function help($number, $wallet, $messageData)
+    {
+        $message = 'Possible actions are: get, add, update, delete, help. You need to send your password an action and'
+            . ' a tag for all actions. Eg. pass1234 add bankdetails Account Number 123456. Get can be done just by'
+            . ' password and tag.';
+
+		$this->sendResponse($number, $message);
+    }
+    
 	private function sendResponse($number, $response)
 	{
 		$sendService = new Essendex_Sendservice(
