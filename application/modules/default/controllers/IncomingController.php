@@ -8,7 +8,8 @@ class IncomingController extends Zend_Controller_Action
         'get',
         'help',
         'delete',
-        'add'
+        'add',
+        'listtags'
     );
     
 	public function init()
@@ -129,14 +130,26 @@ class IncomingController extends Zend_Controller_Action
     
     protected function help($number, $wallet, $messageData)
     {
-        $message = 'Possible actions are: get, add, update, delete, help. You need to send your password an action and'
+        $message = 'Possible actions are: get, add, update, delete, listTags. You need to send your password an action and'
             . ' a tag for all actions. Eg. pass1234 add bankdetails Account Number 123456. Get can be done just by'
             . ' password and tag.';
 
 		$this->sendResponse($number, $message);
     }
     
-	private function sendResponse($number, $response)
+    protected function listtags($number, $wallet, $messageData)
+    {
+        $tags = array();
+        foreach ($wallet as $name => $value) {
+            $tags[] = $name;
+        }
+        
+        $message = "Your stored tags: " . implode(', ', $tags);
+        
+        $this->sendResponse($number, $message);
+    }
+    
+	protected function sendResponse($number, $response)
 	{
 		$sendService = new Essendex_Sendservice(
 			$this->essconf->username,
