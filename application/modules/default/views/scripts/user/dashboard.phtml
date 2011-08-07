@@ -1,5 +1,6 @@
 <?php $this->headTitle('User Dashboard') ?>
 <?php $this->headScript()->appendFile('/js/jquery.textareaCounter.plugin.js'); ?>
+<?php $this->headScript()->appendFile('/js/jquery.confirm.js'); ?>
 
 <?php $this->jquery()->onloadCaptureStart();?>
 
@@ -17,14 +18,16 @@
         return false;
     });
     
-    $('.delete-tag').live('click', function() {
+   
+    
+     $('.delete-tag').live('click', function() {
         var tag = $(this).attr('id').replace(/delete\-/, '');
         var confirm = $('<div id="delete-message">'
             + '<p>Are you sure you want to delete the tag ' + tag + '</p>'
             + '<button id="confirm-delete">Delete</button>'
             + '<button id="cancel-delete">Cancel</button>'
             + '</div>');
-            confirm.dialog();
+            confirm.dialog({title : 'Delete Tag'});
         
         $('#cancel-delete').live('click', function() {
             confirm.dialog('close');
@@ -39,12 +42,13 @@
         return false;
         
     });
+
     
     $('.tag').live('click', function(event) {
         var href = $(this).attr('href');
         var modal = $('<div id="form-container"/>').load(href);
        
-        modal.dialog();
+        modal.dialog({ title: 'Add/Edit Tag' });
         
         $('#tagdata').live('submit', function() {   
             $.post(
@@ -85,6 +89,8 @@
     </div>
 </div>
 <div style="clear:both"/>
+
+
 
 
 

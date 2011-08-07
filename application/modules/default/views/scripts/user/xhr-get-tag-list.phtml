@@ -4,6 +4,7 @@
         <a id="add-tag" class="tag" href="/user/xhr-tag">add new tag...</a>
     </li>
 <?php foreach ($this->tags as $name => $value): ?>
+    <?php if (strpos($name, '_') !== false) { continue; }; ?>
     <li class="taglist-item">
         <a id="tag-<?= htmlentities($name); ?>" class="tag" href="/user/xhr-tag/tag/<?= htmlentities($name); ?>">
             <?= htmlentities($name); ?></a> <a href="/user/xhr-delete-tag/tag/<?= htmlentities($name); ?>" class="delete-tag" id="delete-<?= htmlentities($name); ?>">X<a>

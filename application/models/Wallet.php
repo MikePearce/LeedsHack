@@ -77,4 +77,27 @@ class Wallet implements ArrayAccess, IteratorAggregate
     public function getIterator() {
         return new ArrayIterator($this->data);
     }
+    
+    public function isEnabled()
+    {
+        if (isset($this->data['_disabled']) && $this->data['_disabled']) {
+            return false;
+        }
+        return true;
+    }
+    
+    public function disable($password)
+    {
+        $this->data['_disabled'] = true;
+        $this->save($password);
+        ActivityStream::create($this->id, 'Disabled Account');
+    }
+    
+    public function enable($password)
+    {
+        $this->data['_disabled'] = false;
+        $this->save($password);
+        ActivityStream::create($this->id, 'Re-enabled Account');
+    }
+    
 }

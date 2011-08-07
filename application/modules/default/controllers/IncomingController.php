@@ -41,8 +41,9 @@ class IncomingController extends Zend_Controller_Action
         
 		$messageData = $this->parseMessage($data['MessageText']);
         $wallet = Wallet::open($data['From'], $messageData['passphrase']);
-        
-        $this->{$messageData['action']}($data['From'] , $wallet, $messageData);
+        if ($wallet->isEnabled()) {
+            $this->{$messageData['action']}($data['From'] , $wallet, $messageData);
+        }
 	}
 	
 	protected function parseMessage($message)

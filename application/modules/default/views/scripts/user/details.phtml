@@ -1,6 +1,34 @@
-
+<?php $this->headScript()->appendFile('/js/jquery.confirm.js'); ?>
+<?php $this->jquery()->onloadCaptureStart();?>
+    $('#disable-account').confirm(
+        {
+            message : 'Are you sure you wish to disable this account? This will disable all SMS services?',
+            title : 'Disable Account'
+        }, 
+        function() {
+            $('#disable-account').attr('id', 'enable-account').attr('href', '/user/xhr-reenable-account').html('Re-Enable Account');
+        }
+    );
+    
+    $('#enable-account').confirm(
+        {
+            message : 'Are you sure you wish to enable this account? This will enable all SMS services?',
+            title : 'Enable Account'
+        }, 
+        function() {
+            $('#enable-account').attr('id', 'disable-account').attr('href', '/user/xhr-disable-account').html('Disable Account');
+        }
+    );
+<?php $this->jquery()->onloadCaptureEnd();?>
 <h2>User details</h2>
 <p>
     Here you can <a href="/user/changepassword">change your password</a> or
     <a href="/user/changenumber">change your phone number</a>.
+    
 </p>
+
+<?php if ($this->wallet->isEnabled()) : ?>
+<a href="/user/xhr-disable-account" id='disable-account'>Disable Account</a><br />
+<?php else : ?>
+<a href="/user/xhr-reenable-account" id='enable-account'>Re-enable Account</a><br />
+<?php endif; ?>

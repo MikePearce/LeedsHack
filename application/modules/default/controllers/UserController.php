@@ -25,6 +25,7 @@ class UserController extends Zend_Controller_Action
     
     public function dashboardAction()
     {
+        $this->view->wallet = $this->wallet;
         $userSession = new Zend_Session_Namespace('userSession');
         $this->view->flashMessage = $userSession->flashMessage;
     }
@@ -52,11 +53,7 @@ class UserController extends Zend_Controller_Action
         }
         $this->wallet->save($this->password);
         ActivityStream::create($this->number, 'Deleted tag ' . $tag);
-        $this->_helper->viewRenderer->setNoRender();
-        $this->_helper->layout->disableLayout();
-        $this->_helper->viewRenderer->setNoRender();
-        $this->getResponse()
-            ->appendBody('success');
+        $this->ajaxSuccess();
     }
     
     public function xhrTagAction()
@@ -82,9 +79,7 @@ class UserController extends Zend_Controller_Action
                 $this->wallet->save($this->password);
                 ActivityStream::create($this->number, 'Edited data for tag ' . $form->getValue('tag'));
 	
-                $this->_helper->viewRenderer->setNoRender();
-                $this->getResponse()
-                    ->appendBody('success');
+                $this->ajaxSuccess();
             }
         }
 
@@ -204,9 +199,31 @@ class UserController extends Zend_Controller_Action
         $this->view->form = $form;
     }
     
+
     public function detailsAction()
     {
-        
+        $this->view->wallet = $this->wallet;
+    }
+    
+    public function xhrDisableAccountAction()
+    {
+        $this->wallet->disable($this->password);
+        $this->ajaxSuccess();
+    }
+    
+    public function xhrReenableAccountAction()
+    {
+        $this->wallet->enable($this->password);
+        $this->ajaxSuccess();
+    }
+    
+    
+    protected function ajaxSuccess()
+    {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender();
+        $this->getResponse()
+            ->appendBody('success');
     }
 }
 
