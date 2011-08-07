@@ -1,14 +1,20 @@
 <?php
 class ActivityStream
 {	
-	public static function getByAccountId($accountId)
+    
+	public static function getByAccountId($accountId, $limit = 20)
 	{
 		try {
 			$db = Zend_Registry::get('db');
-		    $res = $db->select()
+		    $select = $db->select()
 			          ->from('activityStream')
-				      ->where('accountId = ? ', $accountId)
-				      ->query();
+				      ->where('accountId = ? ', $accountId);
+            
+            if ($limit) {
+                $select->limit($limit, 0);
+            }
+
+            $res = $select->query();
 				      
 			return $res->fetchAll();
 		} catch(Exception $e) {

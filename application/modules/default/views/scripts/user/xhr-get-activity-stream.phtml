@@ -1,7 +1,7 @@
 	<?php if (is_array($this->activitystream) && !empty($this->activitystream)) :?>
 		<ul class="activityStream">
 			<?php foreach ($this->activitystream as $activity):?>
-				<li><?= $activity->message;?></li>
+				<li><?= $activity->date ?> - <?= $activity->message;?></li>
 			<?php endforeach;?>
 		</ul>
 	<?php else:?>
